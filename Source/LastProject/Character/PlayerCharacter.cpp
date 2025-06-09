@@ -13,6 +13,7 @@
 #include "Animation/AnimInstance.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "LastProject/Items/WeaponData.h"
 
 class UAnimInstance;
 
@@ -166,6 +167,22 @@ void APlayerCharacter::DodgeEnd(UAnimMontage* TargetMontage, bool IsProperlyEnde
 	isDodging = false;
 	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 }
+
+void APlayerCharacter::SetEquippedWeapon(UWeaponData* NewWeapon)
+{
+	if (!NewWeapon->WeaponMesh.IsValid())
+	{
+		NewWeapon->WeaponMesh.LoadSynchronous();
+	}
+	
+	USkeletalMesh* LoadedMesh = NewWeapon->WeaponMesh.Get();
+	Weapon->SetSkeletalMesh(LoadedMesh);
+
+	FName SocketName = "RightHandSocket";
+
+	Weapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, SocketName);
+}
+
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {

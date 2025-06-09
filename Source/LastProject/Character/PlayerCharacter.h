@@ -6,6 +6,7 @@
 #include "CharacterBase.h"
 #include "InputAction.h"
 #include "InputMappingContext.h"
+#include "LastProject/Items/LPWeapon.h"
 #include "PlayerCharacter.generated.h"
 
 /**
@@ -23,7 +24,7 @@ public:
 	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+	// Camera
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class USpringArmComponent> SpringArm;
@@ -31,6 +32,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UCameraComponent> Camera;
 
+	// Input
+protected:
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputMappingContext* IMC_Defalut;
 	
@@ -39,18 +42,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* IA_Jump;
-
-	bool isDodging;
-
-
-protected:
-	void Attack();
-
-	void Move(const FInputActionValue& Value);
-	void Look(const FInputActionValue& Value);
-	void Dodge(const FInputActionValue& Value);
-	void DodgeEnd(UAnimMontage* TargetMontage, bool IsProperlyEnded);
-
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UInputAction> JumpAction;
@@ -72,4 +63,21 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animation)
 	TObjectPtr<class UAnimMontage> DodgeAnimMontage;
+	
+	bool isDodging;
+	
+	void Attack();
+
+	void Move(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
+	void Dodge(const FInputActionValue& Value);
+	void DodgeEnd(UAnimMontage* TargetMontage, bool IsProperlyEnded);
+
+	// Equipment
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Equipment, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class USkeletalMeshComponent> Weapon;
+
+	UFUNCTION()
+	void SetEquippedWeapon(UWeaponData* NewWeapon);
 };
