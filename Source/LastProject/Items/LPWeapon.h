@@ -26,13 +26,13 @@ public:
 
 	FORCEINLINE class UBoxComponent* GetTrigger() const { return Trigger; }
 	
-	UFUNCTION()
-	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,
-		AActor* OtherActor,
-		UPrimitiveComponent* OtherComp,
-		int32 OtherBodyIndex,
-		bool bFromSweep,
-		const FHitResult& SweepResult);
+	// UFUNCTION()
+	// void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,
+	// 	AActor* OtherActor,
+	// 	UPrimitiveComponent* OtherComp,
+	// 	int32 OtherBodyIndex,
+	// 	bool bFromSweep,
+	// 	const FHitResult& SweepResult);
 
 protected:
 	// 액터의 충돌을 담당할 박스 컴포넌트

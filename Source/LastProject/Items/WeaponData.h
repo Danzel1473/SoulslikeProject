@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "ItemData.h"
 #include "../../../../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/CoreUObject/Public/UObject/SoftObjectPtr.h"
+#include "Animation/AnimMontage.h"
 #include "Engine/SkeletalMesh.h"
 #include "WeaponData.generated.h"
 
@@ -28,4 +29,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Weapon, meta = (AllowPrivateAccess = "true"))
 	float Weight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Weapon, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* AttackAnimation;
+
+	UAnimMontage* GetAttackAnimMontage() const { return AttackAnimation; }
+	
 };

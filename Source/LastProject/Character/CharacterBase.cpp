@@ -23,17 +23,17 @@ ACharacterBase::ACharacterBase()
 	// 
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 720.0f, 0.0f);
-	GetCharacterMovement()->JumpZVelocity = 700.0f;
+	GetCharacterMovement()->JumpZVelocity = 400.0f;
 
 	GetCapsuleComponent()->SetCapsuleHalfHeight(88.0f);
+
+	BattleState = BattleState::None;
 
 	// 
 	GetMesh()->SetRelativeLocationAndRotation(
 		FVector(0.0f, 0.0f, -88.0f),
 		FRotator(0.0f, -90.0f, 0.0f)
 	);
-	
-
 }
 
 void ACharacterBase::BeginPlay()
@@ -49,7 +49,6 @@ void ACharacterBase::Tick(float DeltaTime)
 void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	
 }
 
 

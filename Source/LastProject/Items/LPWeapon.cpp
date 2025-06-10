@@ -3,6 +3,8 @@
 
 #include "LPWeapon.h"
 
+#include "Components/BoxComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 
 // Sets default values
@@ -11,5 +13,10 @@ ALPWeapon::ALPWeapon()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Trigger = CreateDefaultSubobject<UBoxComponent>(TEXT("TriggerBox"));
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	
+	SetRootComponent(Trigger);
+	Mesh->SetupAttachment(RootComponent);
 }
 

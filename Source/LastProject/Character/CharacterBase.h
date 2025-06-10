@@ -6,6 +6,15 @@
 #include "GameFramework/Character.h"
 #include "CharacterBase.generated.h"
 
+UENUM(BlueprintType)
+enum class BattleState : uint8
+{
+	None = 0	UMETA(DisplayName = "None"),
+	Attacking	UMETA(DisplayName = "Attacking"),
+	Guarding	UMETA(DisplayName = "Guarding"),
+	Dodging		UMETA(DisplayName = "Dodging"),
+};
+
 UCLASS()
 class LASTPROJECT_API ACharacterBase : public ACharacter
 {
@@ -22,7 +31,8 @@ public:
 	void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;	
 	virtual void SetCharacterControlData(const class UCharacterControlData* InCharacterControlData);
 protected:
-	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	BattleState BattleState;
 public:
 	
 };
