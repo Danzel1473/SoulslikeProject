@@ -25,6 +25,12 @@ public:
 	TSoftObjectPtr<USkeletalMesh> WeaponMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Weapon, meta = (AllowPrivateAccess = "true"))
+	FVector CollisionBoxExtent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Weapon, meta = (AllowPrivateAccess = "true"))
+	FVector CollisionBoxOffset;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Weapon, meta = (AllowPrivateAccess = "true"))
 	float AttackPoint;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Weapon, meta = (AllowPrivateAccess = "true"))
@@ -32,7 +38,4 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Weapon, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* AttackAnimation;
-
-	UAnimMontage* GetAttackAnimMontage() const { return AttackAnimation; }
-	
 };

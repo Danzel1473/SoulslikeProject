@@ -15,6 +15,7 @@
 #include "Animation/AnimInstance.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "LastProject/Items/WeaponBase.h"
 #include "LastProject/Items/WeaponData.h"
 
 class UAnimInstance;
@@ -344,19 +345,28 @@ void APlayerCharacter::ResetAttackTime()
 	bCanAttack = true;
 }
 
-void APlayerCharacter::SetEquippedWeapon(UWeaponData* NewWeapon)
+void APlayerCharacter::SetEquippedWeapon(AWeaponBase* NewWeapon)
 {
-	if (!NewWeapon->WeaponMesh.IsValid())
+	if (!NewWeapon->GetMeshValid())
 	{
-		NewWeapon->WeaponMesh.LoadSynchronous();
+		NewWeapon->AsyncLoadMesh();
 	}
 	
-	USkeletalMesh* LoadedMesh = NewWeapon->WeaponMesh.Get();
-	Weapon->SetSkeletalMesh(LoadedMesh);
-
+	// USkeletalMesh* LoadedMesh = NewWeapon->WeaponMesh.Get();
+	// Weapon->SetSkeletalMesh(LoadedMesh);
+	//
 	FName SocketName = "RightHandSocket";
 
 	Weapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, SocketName);
+}
+
+// void APlayerCharacter::TakeItem(UWeaponData* InWeaponData)
+// {
+// }
+
+void APlayerCharacter::EquipWeapon(class AWeaponBase)
+{
+	
 }
 
 

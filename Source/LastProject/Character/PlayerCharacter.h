@@ -6,14 +6,29 @@
 #include "CharacterBase.h"
 #include "InputAction.h"
 #include "InputMappingContext.h"
+#include "LastProject/Interface/CharacterItemInterface.h"
 #include "LastProject/Items/LPWeapon.h"
+#include "LastProject/Player/LockonComponent.h"
 #include "PlayerCharacter.generated.h"
+
+DECLARE_DELEGATE_OneParam(FOnTakeItemDelegate, class UWeaponData* /*InItemData*/);
+
+USTRUCT(BlueprintType)
+struct FTakeItemDelegateWrapper
+{
+	GENERATED_BODY()
+
+	FTakeItemDelegateWrapper() {}
+	FTakeItemDelegateWrapper(const FOnTakeItemDelegate& InItemDelegate) : ItemDelegate(InItemDelegate) {}
+
+	FOnTakeItemDelegate ItemDelegate;
+};
 
 /**
  * 
  */
 UCLASS()
-class LASTPROJECT_API APlayerCharacter : public ACharacterBase
+class LASTPROJECT_API APlayerCharacter : public ACharacterBase//, public ICharacterItemInterface
 {
 	GENERATED_BODY()
 
@@ -127,9 +142,18 @@ protected:
 	
 	// Equipment
 protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Equipment, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<USkeletalMeshComponent> Weapon;
+	UPROPERTY()
+	FTakeItemDelegateWrapper TakeItemAction;
 
 	UFUNCTION()
-	void SetEquippedWeapon(UWeaponData* NewWeapon);
+	void SetEquippedWeapon(class AWeaponBase* NewWeapon);
+	
+	//virtual void TakeItem(class UWeaponData* InWeaponData) override;
+
+	void EquipWeapon(class AWeaponBase);
+
+	// Sensing
+protected:
+	UPROPERTY(VisibleAnywhere, Category = LockOn, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<ULockonComponent> LockOnComponent;
 };

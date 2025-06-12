@@ -28,11 +28,14 @@ public:
 
 	void Tick(float DeltaTime) override;
 
-	void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;	
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;	
 	virtual void SetCharacterControlData(const class UCharacterControlData* InCharacterControlData);
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	BattleState BattleState;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Equipment, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class AWeaponBase> Weapon;
 public:
 	
 };
