@@ -14,21 +14,10 @@
   <component name="ChangeListManager">
     <list default="true" id="3927419f-cb3e-4ef5-b1ac-cd6a4c87c2de" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LastProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LastProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/UE5/SKM_Executioner_UE5.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/UE5/SKM_Executioner_UE5.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/UE5/SK_Mannequin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/UE5/SK_Mannequin.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/BP_Player.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Input/IMC_PlayerCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Input/IMC_PlayerCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Items/Weapon/BP_Sword.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Items/Weapon/BP_Weapon.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Maps/Map1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Maps/Map1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LastProject.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/LastProject.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/LPWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Items/LPWeapon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/LPWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Items/LPWeapon.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/WeaponData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Items/WeaponData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +31,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://3" root0="FORCE_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/EnhancedInput/Source/EnhancedInput/Private/InputModifiers.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Editor/GraphEditor/Private/SGraphPin.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Containers/Array.h" root0="FORCE_HIGHLIGHTING" />
@@ -233,6 +220,7 @@
       <workItem from="1749514592429" duration="21864000" />
       <workItem from="1749601238606" duration="10887000" />
       <workItem from="1749687526302" duration="12053000" />
+      <workItem from="1749774353576" duration="7101000" />
     </task>
     <servers />
   </component>

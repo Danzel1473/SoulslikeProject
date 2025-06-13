@@ -17,37 +17,40 @@ public:
 
 	// virtual void BeginPlay() override;
 
-	/** 현재 락온 대상 */
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	
+	// 현재 락온 대상
 	UPROPERTY(BlueprintReadOnly)
 	AActor* CurrentTarget;
 
-	/** 적 탐지 거리 */
+	// 탐지 거리
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float MaxDistance = 1000.f;
+	float MaxDistance = 1200.f;
 
-	/** 시야각 */
+	// 시야각
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float FOV = 90.f;
 
-	/** Enemy 채널로 필터링 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TEnumAsByte<ECollisionChannel> EnemyObjectChannel;
-
-	/** 현재 가능한 대상들 */
+	// 락온 대상자들
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> Candidates;
-
-	/** 대상 탐지 */
+	// 대상 탐지
 	UFUNCTION(BlueprintCallable)
 	void DetectLockOnTarget();
 
-	/** 락온 시작 또는 해제 */
+	// 타겟대상들 정렬(왼->오)
+	UFUNCTION(BlueprintCallable)
+	void SortCandidatesLeftToRight();
+	
+	// 락온 시작/종료
 	UFUNCTION(BlueprintCallable)
 	void ToggleLockOn();
 
-	/** 대상 전환 */
+	// 락온 대상 전환
 	UFUNCTION(BlueprintCallable)
 	void SwitchTarget(bool bRight);
 	
 protected:
+	// 락온 상태
+	bool bIsLockOnMode = false;
 };
