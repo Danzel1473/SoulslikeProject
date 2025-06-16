@@ -18,6 +18,7 @@ class LASTPROJECT_API ULPAnimInstance : public UAnimInstance
 	
 	virtual void NativeInitializeAnimation() override;
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
+	float CalculateDirection();
 	
 	// 프로퍼티.
 public:
@@ -32,6 +33,9 @@ public:
 	// 캐릭터의 현재 이동 속도를 저장할 변수.
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Character)
 	FVector Velocity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Character)
+	float Direction;	
 
 	// 캐릭터의 땅에서의 이동 속도를 저장할 변수.
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Character)

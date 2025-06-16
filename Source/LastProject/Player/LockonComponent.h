@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "LPPlayerController.h"
 #include "Components/ActorComponent.h"
 #include "LockonComponent.generated.h"
 
@@ -11,17 +12,29 @@ UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class LASTPROJECT_API ULockonComponent : public UActorComponent
 {
 	GENERATED_BODY()
+	
 
 public:
 	ULockonComponent();
+	virtual void BeginPlay() override;
 
 	// virtual void BeginPlay() override;
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnLockOnModeChanged, bool, IsLockOn);
+	UPROPERTY(BlueprintCallable, Category = "Lockon")
+	FOnLockOnModeChanged OnLockOnModeChanged;
+
+	FTimerHandle LockOnCheckTimer;
+
+	// bIsLockOnMode가 변경될 때 실행될 함수
+	UFUNCTION()
+	void LockOnModeChanged(bool IsLockOn);
 	
 	// 현재 락온 대상
 	UPROPERTY(BlueprintReadOnly)
-	AActor* CurrentTarget;
+	AActor* CurrentTarget = nullptr;
 
 	// 탐지 거리
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -38,6 +51,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DetectLockOnTarget();
 
+	UFUNCTION(BlueprintCallable)
+	AActor* FindBestTargetFromCandidates();
+
 	// 타겟대상들 정렬(왼->오)
 	UFUNCTION(BlueprintCallable)
 	void SortCandidatesLeftToRight();
@@ -49,8 +65,21 @@ public:
 	// 락온 대상 전환
 	UFUNCTION(BlueprintCallable)
 	void SwitchTarget(bool bRight);
-	
+
+	UFUNCTION(BlueprintCallable)
+	bool GetLockOnMode() const { return bIsLockOnMode; }
+	void SetLockOnMode(bool bIsLockOnMode);
 protected:
+	UPROPERTY()
+	TObjectPtr<AActor> Owner;
+	
+	UPROPERTY()
+	TObjectPtr<APlayerController> PlayerController;
+	
+private:
 	// 락온 상태
-	bool bIsLockOnMode = false;
+	UPROPERTY()
+	bool bIsLockOnMode;
+	
 };
+

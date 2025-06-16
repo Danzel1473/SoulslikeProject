@@ -35,5 +35,26 @@ void ULPAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		bIsIdle = GroundSpeed < MovingThreshold;
 		bIsFalling = Movement->IsFalling();
 		bIsJumping = bIsFalling & (Velocity.Z > JumpingThreshold);
+		Direction = CalculateDirection();
 	}
+}
+
+float ULPAnimInstance::CalculateDirection()
+{
+	if (Owner)
+	{
+		if (Velocity.IsNearlyZero()) return 0.f;
+
+		FVector Forward = Owner->GetActorForwardVector();
+		FVector MoveDir = Velocity.GetSafeNormal();
+
+		float AngleRad = FMath::Acos(FVector::DotProduct(Forward, MoveDir));
+		float AngleDeg = FMath::RadiansToDegrees(AngleRad);
+
+		// 왼쪽/오른쪽 판별
+		float Sign = FVector::CrossProduct(Forward, MoveDir).Z < 0 ? -1.f : 1.f;
+
+		return AngleDeg * Sign; // -180 ~ 180 범위
+	}
+	return 0.f;
 }

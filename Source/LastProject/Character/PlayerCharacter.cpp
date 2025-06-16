@@ -101,6 +101,8 @@ APlayerCharacter::APlayerCharacter()
 		DodgeAnimMontage = DodgeAnimMontageRef.Object;
 	}
 	bIsDodging = false;
+
+	LockOnComponent = CreateDefaultSubobject<ULockonComponent>(TEXT("LockOnComponent"));
 }
 
 void APlayerCharacter::BeginPlay()
@@ -113,6 +115,11 @@ void APlayerCharacter::BeginPlay()
 	if (auto SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 	{
 		SubSystem->AddMappingContext(DefaultMappingContext, 0);
+	}
+	
+	if (LockOnComponent)
+	{
+		LockOnComponent->OnLockOnModeChanged.AddDynamic(this, &APlayerCharacter::SetLockOnMovingMode);
 	}
 }
 
@@ -134,20 +141,33 @@ void APlayerCharacter::Guard()
 
 void APlayerCharacter::Move(const FInputActionValue& Value)
 {
-	// 입력 값 읽기.
+	// 입력 값 읽기
 	FVector2D Movement = Value.Get<FVector2D>();
 
-	// 컨트롤러의 회전 값.
-	FRotator Rotation = GetControlRotation();
-	FRotator YawRotation(0.0f, Rotation.Yaw, 0.0f);
+	if (LockOnComponent && LockOnComponent->GetLockOnMode())
+	{
+		// 락온 상태에서는 캐릭터 자체 방향 사용
+		FVector Forward = GetActorForwardVector();
+		FVector Right = GetActorRightVector();
 
-	// 방향 구하기.
-	FVector ForwardVector = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-	FVector RightVector = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+		AddMovementInput(Forward, Movement.X);
+		AddMovementInput(Right, Movement.Y);
+	}
+	else
+	{
 
-	// 무브먼트 컴포넌트에 값 전달.
-	AddMovementInput(ForwardVector, Movement.X);
-	AddMovementInput(RightVector, Movement.Y);
+		// 컨트롤러의 회전 값
+		FRotator Rotation = GetControlRotation();
+		FRotator YawRotation(0.0f, Rotation.Yaw, 0.0f);
+
+		// 방향 구하기
+		FVector ForwardVector = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		FVector RightVector = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
+		// 무브먼트 컴포넌트에 값 전달
+		AddMovementInput(ForwardVector, Movement.X);
+		AddMovementInput(RightVector, Movement.Y);
+	}
 }
 
 void APlayerCharacter::Look(const FInputActionValue& Value)
@@ -166,19 +186,32 @@ void APlayerCharacter::Dodge(const FInputActionValue& Value)
 	// 회피중/점프중에 회피 불가
 	//if (bIsDodging || GetMovementComponent()->IsFalling() || bIsAttacking) return;
 	
-	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None);
+	//GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None);
 
-	// Dodge Montage 실행
-	if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+	if (BattleState == BattleState::None && !GetCharacterMovement()->IsFalling())
 	{
-		BattleState = BattleState::Dodging;
-		float SpeedRate = 1; // 추후 무게 값을 반영
-		AnimInstance->Montage_Play(DodgeAnimMontage, SpeedRate);
+		if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+		{
+			BattleState = BattleState::Dodging;
+			float SpeedRate = 1; // 추후 무게 값을 반영
+			AnimInstance->Montage_Play(DodgeAnimMontage, SpeedRate);
 
-		// Todo: 닷지중에 무적 상태 추가
-		FOnMontageEnded EndDelegate;
-		EndDelegate.BindUObject(this, &APlayerCharacter::DodgeEnd);
-		AnimInstance->Montage_SetEndDelegate(EndDelegate, DodgeAnimMontage);
+			// Todo: 닷지중에 무적 상태 추가
+
+			// 딜리게이트 추가
+			FOnMontageEnded EndDelegate;
+			EndDelegate.BindUObject(this, &APlayerCharacter::DodgeEnd);
+			AnimInstance->Montage_SetEndDelegate(EndDelegate, DodgeAnimMontage);
+		}
+	}
+	// Dodge Montage 실행
+}
+
+void APlayerCharacter::Jump(const FInputActionValue& Value)
+{
+	if (BattleState == BattleState::None)
+	{
+		ACharacter::Jump();
 	}
 }
 
@@ -186,6 +219,34 @@ void APlayerCharacter::DodgeEnd(UAnimMontage* TargetMontage, bool IsProperlyEnde
 {
 	BattleState = BattleState::None;
 	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+}
+
+void APlayerCharacter::SetLockOnMovingMode(bool IsLockOnMode)
+{
+	UE_LOG(LogInput, Log, TEXT("델리게이트 확인"));
+	if (IsLockOnMode)
+	{
+		bUseControllerRotationYaw = true;
+		GetCharacterMovement()->bOrientRotationToMovement = false;
+
+		AController* PlayerController = GetController();
+		if (PlayerController)
+		{
+			GetController()->SetIgnoreLookInput(true);
+		}
+	}
+	else
+	{
+		bUseControllerRotationYaw = false;
+		GetCharacterMovement()->bOrientRotationToMovement = true;
+
+		AController* PlayerController = GetController();
+		if (PlayerController)
+		{
+			GetController()->SetIgnoreLookInput(false);
+		}
+		
+	}
 }
 
 void APlayerCharacter::ProcessComboCommand()
@@ -377,10 +438,16 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	auto EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
 
 	// 바인딩
-	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter::Jump);
+	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Jump);
 	EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
 	//EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Attack);
 	EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Dodge);
 	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Move);
 
+}
+
+float APlayerCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
+	class AController* EventInstigator, AActor* DamageCauser)
+{
+	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }

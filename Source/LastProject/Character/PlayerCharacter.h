@@ -39,6 +39,8 @@ public:
 	
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
 	// Camera
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -97,7 +99,11 @@ protected:
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	void Dodge(const FInputActionValue& Value);
+	void Jump(const FInputActionValue& Value);
 	void DodgeEnd(UAnimMontage* TargetMontage, bool IsProperlyEnded);
+
+	UFUNCTION()
+	void SetLockOnMovingMode(bool IsLockOnMode);
 
 public:
 	void SetComboAttackMontage(UAnimMontage* NewMontage) { ComboAttackMontage = NewMontage; }
@@ -152,8 +158,8 @@ protected:
 
 	void EquipWeapon(class AWeaponBase);
 
-	// Sensing
+	// LockOn
 protected:
-	UPROPERTY(VisibleAnywhere, Category = LockOn, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = LockOn, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<ULockonComponent> LockOnComponent;
 };

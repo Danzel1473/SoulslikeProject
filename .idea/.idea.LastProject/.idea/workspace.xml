@@ -14,8 +14,17 @@
   <component name="ChangeListManager">
     <list default="true" id="3927419f-cb3e-4ef5-b1ac-cd6a4c87c2de" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LastProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LastProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/CourseFiles/Animations/Dodge/Rolling.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/CourseFiles/Animations/Dodge/Rolling.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/Animation/ABP_PlayerCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/Animation/ABP_PlayerCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Dodge.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Dodge.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/BP_Player.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Maps/Map1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Maps/Map1.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.h" afterDir="false" />
     </list>
@@ -31,7 +40,23 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://13" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/EnhancedInput/Source/EnhancedInput/Private/InputModifiers.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Editor/GraphEditor/Private/SGraphPin.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Containers/Array.h" root0="FORCE_HIGHLIGHTING" />
@@ -74,21 +99,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;C/C++ 프로젝트.LastProject.executor&quot;: &quot;Debug&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "C/C++ 프로젝트.LastProject.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "CppCodeGenerationId",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="C/C++ 프로젝트.LastProject">
     <configuration name="LastProject" type="CppProject" factoryName="C++ Project">
       <configuration_1 setup="1">
@@ -220,7 +246,9 @@
       <workItem from="1749514592429" duration="21864000" />
       <workItem from="1749601238606" duration="10887000" />
       <workItem from="1749687526302" duration="12053000" />
-      <workItem from="1749774353576" duration="7101000" />
+      <workItem from="1749774353576" duration="8656000" />
+      <workItem from="1750033313606" duration="9381000" />
+      <workItem from="1750051451578" duration="6483000" />
     </task>
     <servers />
   </component>
@@ -249,5 +277,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

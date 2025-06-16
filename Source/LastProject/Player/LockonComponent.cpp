@@ -9,6 +9,8 @@
 #include "Engine/OverlapResult.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
 
 #define ECC_Enemy ECC_GameTraceChannel1
@@ -17,25 +19,42 @@
 ULockonComponent::ULockonComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
+    SetLockOnMode(false);
+}
+
+void ULockonComponent::BeginPlay()
+{
+    Super::BeginPlay();
+
+    Owner = GetOwner();
+    PlayerController = Cast<APlayerController>(Owner->GetInstigatorController());
+
+    OnLockOnModeChanged.AddDynamic(this, &ULockonComponent::LockOnModeChanged);
+
 }
 
 void ULockonComponent::TickComponent(float DeltaTime, ELevelTick TickType,
-    FActorComponentTickFunction* ThisTickFunction)
+                                     FActorComponentTickFunction* ThisTickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+    
+    
     if (bIsLockOnMode && CurrentTarget)
     {
-        AActor* Owner = GetOwner();
-        APlayerController* PlayerController = Cast<APlayerController>(Owner->GetInstigatorController());
         if (!PlayerController) return;
-
         FVector ToTarget = CurrentTarget->GetActorLocation() - Owner->GetActorLocation();
+        ToTarget.Z = 0.f; // 수평으로만 계산
         FRotator TargetRot = ToTarget.Rotation();
-        TargetRot.Pitch = 0.f;
-        TargetRot.Roll = 0.f;
-        
+
         PlayerController->SetControlRotation(FMath::RInterpTo(PlayerController->GetControlRotation(), TargetRot, DeltaTime, 16.f));
+    }
+    // else if (bIsLockOnMode && Candidates.Num() > 0 && !CurrentTarget)
+    // {
+    //     CurrentTarget = FindBestTargetFromCandidates();
+    // }
+    if (GetLockOnMode() && Candidates.Num() == 0)
+    {
+        SetLockOnMode(false);
     }
 }
 
@@ -44,11 +63,12 @@ void ULockonComponent::SortCandidatesLeftToRight()
 {
     if (Candidates.Num() == 0) return;
 
-    APlayerController* PlayerController = Cast<APlayerController>(GetOwner()->GetInstigatorController());
     if (!PlayerController) return;
 
-    Candidates.Sort([PlayerController](const AActor& A, const AActor& B)
+    Candidates.Sort([this](const AActor& A, const AActor& B)
     {
+        if (!PlayerController) return false;
+        
         FVector2D ScreenPosA, ScreenPosB;
         bool bAOnScreen = PlayerController->ProjectWorldLocationToScreen(A.GetActorLocation(), ScreenPosA);
         bool bBOnScreen = PlayerController->ProjectWorldLocationToScreen(B.GetActorLocation(), ScreenPosB);
@@ -70,12 +90,38 @@ void ULockonComponent::SortCandidatesLeftToRight()
     });
 }
 
+void ULockonComponent::LockOnModeChanged(bool IsLockOn)
+{
+    if (IsLockOn)
+    {
+        // 주기적으로 락온 대상을 체크할 타이머 스타트
+        UE_LOG(LogActor, Log, TEXT("타이머 스타트"));
+        GetWorld()->GetTimerManager().SetTimer(LockOnCheckTimer, [this]()
+            {
+                DetectLockOnTarget();
+
+                if (Candidates.Num() <= 0)
+                {
+                    SetLockOnMode(false);
+                }
+                else if (!CurrentTarget || !Candidates.Find(CurrentTarget))
+                {
+                    FindBestTargetFromCandidates();
+                }
+            }, 0.5f, true);
+    }
+    else
+    {
+        UE_LOG(LogActor, Log, TEXT("타이머 종료"));
+
+        GetWorld()->GetTimerManager().ClearTimer(LockOnCheckTimer);
+    }
+}
+
 void ULockonComponent::DetectLockOnTarget()
 {
-	AActor* Owner = GetOwner();
     if (!Owner) return;
 
-    APlayerController* PlayerController = Cast<APlayerController>(Owner->GetInstigatorController());
     if (!PlayerController) return;
 
     FVector CameraLoc;
@@ -85,6 +131,8 @@ void ULockonComponent::DetectLockOnTarget()
     // 구체 탐색 (적 후보 수집)
     TArray<FOverlapResult> Overlaps;
     FCollisionQueryParams Params(NAME_None, false, Owner);
+    
+    UE_LOG(LogInput, Log, TEXT("락온 대상 스캔"));
 
     GetWorld()->OverlapMultiByObjectType(
         Overlaps,
@@ -97,11 +145,6 @@ void ULockonComponent::DetectLockOnTarget()
 
     int32 SizeX, SizeY;
     PlayerController->GetViewportSize(SizeX, SizeY);
-
-    FVector2D ScreenCenter(SizeX * 0.5f, SizeY * 0.5f);
-    
-    float ClosestScreenDist = FLT_MAX;
-    AActor* ClosestTarget = nullptr;
 
     Candidates.Empty();
 
@@ -130,22 +173,22 @@ void ULockonComponent::DetectLockOnTarget()
                 // 락온 대상 배열에 등록
                 Candidates.Add(Target);
 
-                // 거리 계산
-                float DistToCenter = FVector2D::Distance(ScreenPos, ScreenCenter);
-                if (DistToCenter < ClosestScreenDist)
-                {
-                    ClosestScreenDist = DistToCenter;
-                    ClosestTarget = Target;
-                }
-
                 // Debug: 시야 내 적에게 디버그 스피어 그려줌
                 DrawDebugSphere(GetWorld(), Target->GetActorLocation(), 30.f, 12, FColor::Red, false, 1.0f);
             }
         }
     }
 
+    if (Candidates.Num() <= 0)
+    {
+        if (bIsLockOnMode)
+        {
+            SetLockOnMode(false);
+        }
+    }
+
     // 카메라 중심에서 가장 가까운 적을 락온 대상으로 설정
-    CurrentTarget = ClosestTarget;
+    CurrentTarget = FindBestTargetFromCandidates();
     SortCandidatesLeftToRight();
 
     if (CurrentTarget)
@@ -158,15 +201,43 @@ void ULockonComponent::DetectLockOnTarget()
     }
 }
 
+AActor* ULockonComponent::FindBestTargetFromCandidates()
+{
+    if (!PlayerController || Candidates.Num() == 0) return nullptr;
+
+    int32 SizeX, SizeY;
+    PlayerController->GetViewportSize(SizeX, SizeY);
+    FVector2D ScreenCenter(SizeX * 0.5f, SizeY * 0.5f);
+
+    float ClosestDist = FLT_MAX;
+    AActor* BestTarget = nullptr;
+
+    for (AActor* Target : Candidates)
+    {
+        if (!Target) continue;
+
+        FVector2D ScreenPos;
+        if (PlayerController->ProjectWorldLocationToScreen(Target->GetActorLocation(), ScreenPos))
+        {
+            float Dist = FVector2D::Distance(ScreenPos, ScreenCenter);
+            if (Dist < ClosestDist)
+            {
+                ClosestDist = Dist;
+                BestTarget = Target;
+            }
+        }
+    }
+
+    return BestTarget;
+}
+
+
 void ULockonComponent::ToggleLockOn()
 {
-    APlayerController* PlayerController = Cast<APlayerController>(GetOwner()->GetInstigatorController());
-
     if (bIsLockOnMode)
     {
-        bIsLockOnMode = false;
+        SetLockOnMode(false);
         CurrentTarget = nullptr;
-        PlayerController->SetIgnoreLookInput(false);
 
     }
     else
@@ -174,9 +245,8 @@ void ULockonComponent::ToggleLockOn()
         DetectLockOnTarget();
         if (CurrentTarget)
         {
-            bIsLockOnMode = true;
-            if (PlayerController)
-                PlayerController->SetIgnoreLookInput(true);
+            SetLockOnMode(true);
+            
         }
     }
 }
@@ -185,15 +255,15 @@ void ULockonComponent::SwitchTarget(bool bRight)
 {
     if (!bIsLockOnMode || !CurrentTarget) return;
 
-    AActor* Owner = GetOwner();
+    DetectLockOnTarget();
     SortCandidatesLeftToRight();
 
-    APlayerController* PlayerController = Cast<APlayerController>(Owner->GetInstigatorController());
     if (!PlayerController) return;
     int32 CurrentTargetNum = Candidates.Find(CurrentTarget);
     
     if (bRight)
     {
+        if (Candidates.Num() <= 0 ) return;
         if (CurrentTargetNum != Candidates.Num() - 1)
             CurrentTarget = Candidates[CurrentTargetNum + 1];
         else
@@ -203,6 +273,8 @@ void ULockonComponent::SwitchTarget(bool bRight)
     }
     else
     {
+        if (Candidates.Num() <= 0 ) return;
+
         if (CurrentTargetNum != 0)
             CurrentTarget = Candidates[CurrentTargetNum - 1];
         else
@@ -210,4 +282,12 @@ void ULockonComponent::SwitchTarget(bool bRight)
             CurrentTarget = Candidates[Candidates.Num() - 1];
         }
     }
+}
+
+void ULockonComponent::SetLockOnMode(bool IsLockOn)
+{
+    if (bIsLockOnMode == IsLockOn) return;
+    
+    bIsLockOnMode = IsLockOn;
+    OnLockOnModeChanged.Broadcast(bIsLockOnMode);
 }
