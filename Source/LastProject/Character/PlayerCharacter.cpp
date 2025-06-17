@@ -3,7 +3,6 @@
 #include "PlayerCharacter.h"
 
 #include "GameFramework/Character.h"
-#include "CharacterControlData.h"
 #include "ComboActionData.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -11,12 +10,14 @@
 #include "EnhancedInputComponent.h"
 #include "Engine/LocalPlayer.h"
 #include "EnhancedInputSubsystems.h"
+#include "NonPlayerCharacter.h"
 #include "TimerManager.h"
 #include "Animation/AnimInstance.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/DamageType.h"
+#include "Kismet/GameplayStatics.h"
 #include "LastProject/Items/WeaponBase.h"
-#include "LastProject/Items/WeaponData.h"
 
 class UAnimInstance;
 
@@ -103,6 +104,7 @@ APlayerCharacter::APlayerCharacter()
 	bIsDodging = false;
 
 	LockOnComponent = CreateDefaultSubobject<ULockonComponent>(TEXT("LockOnComponent"));
+
 }
 
 void APlayerCharacter::BeginPlay()
@@ -120,6 +122,27 @@ void APlayerCharacter::BeginPlay()
 	if (LockOnComponent)
 	{
 		LockOnComponent->OnLockOnModeChanged.AddDynamic(this, &APlayerCharacter::SetLockOnMovingMode);
+	}
+	
+	if (WeaponCollision)
+	{
+		WeaponCollision->SetGenerateOverlapEvents(true);
+		WeaponCollision->OnComponentBeginOverlap.AddDynamic(this, &APlayerCharacter::OnWeaponOverlapBegin);
+	}
+}
+
+void APlayerCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	
+	if (LockOnComponent->GetLockOnMode() && LockOnComponent->CurrentTarget)
+	{
+		if (!GetController()) return;
+		FVector ToTarget = LockOnComponent->CurrentTarget->GetActorLocation() - GetActorLocation();
+		//ToTarget.Z = 0.f; // 수평으로만 계산
+		FRotator TargetRot = ToTarget.Rotation();
+
+		GetController()->SetControlRotation(FMath::RInterpTo(GetController()->GetControlRotation(), TargetRot, DeltaSeconds, 16.f));
 	}
 }
 
@@ -406,30 +429,19 @@ void APlayerCharacter::ResetAttackTime()
 	bCanAttack = true;
 }
 
-void APlayerCharacter::SetEquippedWeapon(AWeaponBase* NewWeapon)
+void APlayerCharacter::OnWeaponOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (!NewWeapon->GetMeshValid())
-	{
-		NewWeapon->AsyncLoadMesh();
-	}
-	
-	// USkeletalMesh* LoadedMesh = NewWeapon->WeaponMesh.Get();
-	// Weapon->SetSkeletalMesh(LoadedMesh);
-	//
-	FName SocketName = "RightHandSocket";
+	UE_LOG(LogInput, Log, TEXT("Overlapped"));
+	if (OtherActor == this) return;
 
-	Weapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, SocketName);
+	ANonPlayerCharacter* HitEnemy = Cast<ANonPlayerCharacter>(OtherActor);
+	if (!HitEnemy) return;
+
+	// 테스트용 임시 데미지
+	float DamageAmount = 10.f;
+	UGameplayStatics::ApplyDamage(OtherActor, DamageAmount, GetController(), this, UDamageType::StaticClass());
 }
-
-// void APlayerCharacter::TakeItem(UWeaponData* InWeaponData)
-// {
-// }
-
-void APlayerCharacter::EquipWeapon(class AWeaponBase)
-{
-	
-}
-
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {

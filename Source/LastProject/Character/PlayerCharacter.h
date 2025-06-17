@@ -6,29 +6,28 @@
 #include "CharacterBase.h"
 #include "InputAction.h"
 #include "InputMappingContext.h"
-#include "LastProject/Interface/CharacterItemInterface.h"
 #include "LastProject/Items/LPWeapon.h"
 #include "LastProject/Player/LockonComponent.h"
 #include "PlayerCharacter.generated.h"
 
-DECLARE_DELEGATE_OneParam(FOnTakeItemDelegate, class UWeaponData* /*InItemData*/);
-
-USTRUCT(BlueprintType)
-struct FTakeItemDelegateWrapper
-{
-	GENERATED_BODY()
-
-	FTakeItemDelegateWrapper() {}
-	FTakeItemDelegateWrapper(const FOnTakeItemDelegate& InItemDelegate) : ItemDelegate(InItemDelegate) {}
-
-	FOnTakeItemDelegate ItemDelegate;
-};
+// DECLARE_DELEGATE_OneParam(FOnTakeItemDelegate, class UWeaponData* /*InItemData*/);
+//
+// USTRUCT(BlueprintType)
+// struct FTakeItemDelegateWrapper
+// {
+// 	GENERATED_BODY()
+//
+// 	FTakeItemDelegateWrapper() {}
+// 	FTakeItemDelegateWrapper(const FOnTakeItemDelegate& InItemDelegate) : ItemDelegate(InItemDelegate) {}
+//
+// 	FOnTakeItemDelegate ItemDelegate;
+// };
 
 /**
  * 
  */
 UCLASS()
-class LASTPROJECT_API APlayerCharacter : public ACharacterBase//, public ICharacterItemInterface
+class LASTPROJECT_API APlayerCharacter : public ACharacterBase
 {
 	GENERATED_BODY()
 
@@ -36,6 +35,8 @@ public:
 	APlayerCharacter();
 
 	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaSeconds) override;
 	
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
@@ -142,21 +143,24 @@ protected:
 	void ComboCheck();
 
 	void ResetAttackTime();
+
+	UFUNCTION()
+	void OnWeaponOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
 	// 콤보 타이머 이전에 입력이 들어왔는지를 확인하는 불리언 변수
 	bool HasNextComboCommand = false;
 	
 	// Equipment
 protected:
-	UPROPERTY()
-	FTakeItemDelegateWrapper TakeItemAction;
+	// UPROPERTY()
+	// FTakeItemDelegateWrapper TakeItemAction;
 
-	UFUNCTION()
-	void SetEquippedWeapon(class AWeaponBase* NewWeapon);
+	// UFUNCTION()
+	// void SetEquippedWeapon(class AWeaponBase* NewWeapon);
 	
 	//virtual void TakeItem(class UWeaponData* InWeaponData) override;
 
-	void EquipWeapon(class AWeaponBase);
+	// void EquipWeapon(class AWeaponBase);
 
 	// LockOn
 protected:

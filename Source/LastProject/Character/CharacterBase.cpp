@@ -8,6 +8,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "LastProject/LastProject.h"
+#include "LastProject/Items/WeaponBase.h"
 
 // Sets default values
 ACharacterBase::ACharacterBase()
@@ -34,6 +35,16 @@ ACharacterBase::ACharacterBase()
 		FVector(0.0f, 0.0f, -88.0f),
 		FRotator(0.0f, -90.0f, 0.0f)
 	);
+
+	FName SocketName = TEXT("RightHandSocket");
+
+	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
+	WeaponMesh->SetupAttachment(GetMesh(), SocketName);
+
+	WeaponCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("WeaponCollision"));
+	WeaponCollision->SetupAttachment(WeaponMesh);
+	WeaponCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
 }
 
 void ACharacterBase::BeginPlay()
@@ -68,3 +79,26 @@ void ACharacterBase::SetCharacterControlData(const class UCharacterControlData* 
 	GetCharacterMovement()->bUseControllerDesiredRotation = InCharacterControlData->bUseControllerDesiredRotation;
 	GetCharacterMovement()->RotationRate = InCharacterControlData->RotationRate;
 }
+
+void ACharacterBase::EnableWeaponCollision_Implementation()
+{
+	ICombatInterface::EnableWeaponCollision_Implementation();
+
+	if (WeaponCollision)
+	{
+		WeaponCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		UE_LOG(LogInput, Log, TEXT("WeaponCollision Status: %s"), WeaponCollision->GetCollisionEnabled() ? TEXT("Enabled") : TEXT("Disabled"));
+	}
+}
+
+void ACharacterBase::DisableWeaponCollision_Implementation()
+{
+	ICombatInterface::DisableWeaponCollision_Implementation();
+	
+	if (WeaponCollision)
+	{
+		WeaponCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		UE_LOG(LogInput, Log, TEXT("WeaponCollision Status: %s"), WeaponCollision->GetCollisionEnabled() ? TEXT("Enabled") : TEXT("Disabled"));
+	}
+}
+

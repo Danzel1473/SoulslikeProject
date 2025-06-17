@@ -7,6 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "LockonComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnLockOnModeChanged, bool, IsLockOn);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class LASTPROJECT_API ULockonComponent : public UActorComponent
@@ -18,11 +19,6 @@ public:
 	ULockonComponent();
 	virtual void BeginPlay() override;
 
-	// virtual void BeginPlay() override;
-
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnLockOnModeChanged, bool, IsLockOn);
 	UPROPERTY(BlueprintCallable, Category = "Lockon")
 	FOnLockOnModeChanged OnLockOnModeChanged;
 
@@ -45,8 +41,9 @@ public:
 	float FOV = 90.f;
 
 	// 락온 대상자들
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<AActor*> Candidates;
+	
 	// 대상 탐지
 	UFUNCTION(BlueprintCallable)
 	void DetectLockOnTarget();
@@ -69,6 +66,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool GetLockOnMode() const { return bIsLockOnMode; }
 	void SetLockOnMode(bool bIsLockOnMode);
+	
 protected:
 	UPROPERTY()
 	TObjectPtr<AActor> Owner;

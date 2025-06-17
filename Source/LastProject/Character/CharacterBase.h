@@ -3,7 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/BoxComponent.h"
 #include "GameFramework/Character.h"
+#include "LastProject/Interface/CombatInterface.h"
 #include "CharacterBase.generated.h"
 
 UENUM(BlueprintType)
@@ -16,7 +18,7 @@ enum class BattleState : uint8
 };
 
 UCLASS()
-class LASTPROJECT_API ACharacterBase : public ACharacter
+class LASTPROJECT_API ACharacterBase : public ACharacter, public ICombatInterface
 {
 	GENERATED_BODY()
 
@@ -32,10 +34,21 @@ public:
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;	
 	virtual void SetCharacterControlData(const class UCharacterControlData* InCharacterControlData);
+
+	virtual void EnableWeaponCollision_Implementation() override;
+	virtual void DisableWeaponCollision_Implementation() override;
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	BattleState BattleState;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Equipment, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<USkeletalMeshComponent> WeaponMesh; 
+	
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Equipment, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UBoxComponent> WeaponCollision;
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Equipment, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class AWeaponBase> Weapon;
 public:

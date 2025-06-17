@@ -3,5 +3,6 @@
 
 #include "CharacterItemInterface.h"
 
-// Add default functionality here for any ICharacterItemInterface functions that are not pure virtual.
+#include "CombatInterface.h"
 
+// Add default functionality here for any ICharacterItemInterface functions that are not pure virtual.

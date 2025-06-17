@@ -39,12 +39,3 @@ void AWeaponBase::InitializeWeapon(UWeaponData* NewWeaponData)
 	AttackPower = WeaponData->AttackPoint;
 }
 
-void AWeaponBase::AsyncLoadMesh()
-{
-	if (!Mesh.IsValid())
-	{
-		Mesh.LoadSynchronous();
-	}
-	
-}
-

@@ -9,8 +9,6 @@
 #include "Engine/OverlapResult.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
-#include "GameFramework/Character.h"
-#include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
 
 #define ECC_Enemy ECC_GameTraceChannel1
@@ -32,32 +30,6 @@ void ULockonComponent::BeginPlay()
     OnLockOnModeChanged.AddDynamic(this, &ULockonComponent::LockOnModeChanged);
 
 }
-
-void ULockonComponent::TickComponent(float DeltaTime, ELevelTick TickType,
-                                     FActorComponentTickFunction* ThisTickFunction)
-{
-    Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-    
-    
-    if (bIsLockOnMode && CurrentTarget)
-    {
-        if (!PlayerController) return;
-        FVector ToTarget = CurrentTarget->GetActorLocation() - Owner->GetActorLocation();
-        ToTarget.Z = 0.f; // 수평으로만 계산
-        FRotator TargetRot = ToTarget.Rotation();
-
-        PlayerController->SetControlRotation(FMath::RInterpTo(PlayerController->GetControlRotation(), TargetRot, DeltaTime, 16.f));
-    }
-    // else if (bIsLockOnMode && Candidates.Num() > 0 && !CurrentTarget)
-    // {
-    //     CurrentTarget = FindBestTargetFromCandidates();
-    // }
-    if (GetLockOnMode() && Candidates.Num() == 0)
-    {
-        SetLockOnMode(false);
-    }
-}
-
 
 void ULockonComponent::SortCandidatesLeftToRight()
 {
@@ -95,24 +67,27 @@ void ULockonComponent::LockOnModeChanged(bool IsLockOn)
     if (IsLockOn)
     {
         // 주기적으로 락온 대상을 체크할 타이머 스타트
-        UE_LOG(LogActor, Log, TEXT("타이머 스타트"));
+        UE_LOG(LogInput, Log, TEXT("타이머 스타트"));
         GetWorld()->GetTimerManager().SetTimer(LockOnCheckTimer, [this]()
             {
                 DetectLockOnTarget();
+                SortCandidatesLeftToRight();
 
-                if (Candidates.Num() <= 0)
+                // 락온 대상 배열이 없다면 락온 모드 해제
+                if (Candidates.Num() < 1)
                 {
                     SetLockOnMode(false);
                 }
-                else if (!CurrentTarget || !Candidates.Find(CurrentTarget))
+                // 락온 대상 배열이 비어 있지 않은데, CurrentTarget이 Candidates에 없을 경우
+                else if (!Candidates.Contains(CurrentTarget))
                 {
-                    FindBestTargetFromCandidates();
+                    CurrentTarget = FindBestTargetFromCandidates();
                 }
-            }, 0.5f, true);
+            }, 0.6f, true);
     }
     else
     {
-        UE_LOG(LogActor, Log, TEXT("타이머 종료"));
+        UE_LOG(LogInput, Log, TEXT("타이머 종료"));
 
         GetWorld()->GetTimerManager().ClearTimer(LockOnCheckTimer);
     }
@@ -121,7 +96,6 @@ void ULockonComponent::LockOnModeChanged(bool IsLockOn)
 void ULockonComponent::DetectLockOnTarget()
 {
     if (!Owner) return;
-
     if (!PlayerController) return;
 
     FVector CameraLoc;
@@ -134,6 +108,7 @@ void ULockonComponent::DetectLockOnTarget()
     
     UE_LOG(LogInput, Log, TEXT("락온 대상 스캔"));
 
+    // Enemy 채널로 1차 판별
     GetWorld()->OverlapMultiByObjectType(
         Overlaps,
         Owner->GetActorLocation(),
@@ -168,7 +143,7 @@ void ULockonComponent::DetectLockOnTarget()
                 Params
             );
 
-            if (!bBlocked || Hit.GetActor() == Target)
+            if (!bBlocked || Hit.GetActor() == Target || Hit.GetActor()->ActorHasTag("Enemy"))
             {
                 // 락온 대상 배열에 등록
                 Candidates.Add(Target);
@@ -186,10 +161,6 @@ void ULockonComponent::DetectLockOnTarget()
             SetLockOnMode(false);
         }
     }
-
-    // 카메라 중심에서 가장 가까운 적을 락온 대상으로 설정
-    CurrentTarget = FindBestTargetFromCandidates();
-    SortCandidatesLeftToRight();
 
     if (CurrentTarget)
     {
@@ -219,6 +190,7 @@ AActor* ULockonComponent::FindBestTargetFromCandidates()
         FVector2D ScreenPos;
         if (PlayerController->ProjectWorldLocationToScreen(Target->GetActorLocation(), ScreenPos))
         {
+            // 거리 계산
             float Dist = FVector2D::Distance(ScreenPos, ScreenCenter);
             if (Dist < ClosestDist)
             {
@@ -238,11 +210,19 @@ void ULockonComponent::ToggleLockOn()
     {
         SetLockOnMode(false);
         CurrentTarget = nullptr;
-
     }
     else
     {
+        // 락온배열 탐지
         DetectLockOnTarget();
+        if (Candidates.Num() > 0)
+        {
+            // 카메라 중심에서 가장 가까운 적을 락온 대상으로 설정
+            CurrentTarget = FindBestTargetFromCandidates();
+            // 락온배열 정렬
+            SortCandidatesLeftToRight();
+        }
+        
         if (CurrentTarget)
         {
             SetLockOnMode(true);
@@ -263,7 +243,14 @@ void ULockonComponent::SwitchTarget(bool bRight)
     
     if (bRight)
     {
-        if (Candidates.Num() <= 0 ) return;
+        if (Candidates.Num() <= 1 ) return;
+
+        if (CurrentTargetNum < 0)
+        {
+            CurrentTarget = Candidates[Candidates.Num() - 1];
+            return;
+        }
+        
         if (CurrentTargetNum != Candidates.Num() - 1)
             CurrentTarget = Candidates[CurrentTargetNum + 1];
         else
@@ -273,7 +260,14 @@ void ULockonComponent::SwitchTarget(bool bRight)
     }
     else
     {
-        if (Candidates.Num() <= 0 ) return;
+        if (Candidates.Num() <= 1 ) return;
+        if (CurrentTargetNum < 0)
+        {
+            CurrentTarget = Candidates[0];
+            return;
+        }
+
+        UE_LOG(LogInput, Log, TEXT("CurrentTargetNum = %d"), CurrentTargetNum);
 
         if (CurrentTargetNum != 0)
             CurrentTarget = Candidates[CurrentTargetNum - 1];

@@ -19,14 +19,11 @@ public:
 
 	void InitializeWeapon(UWeaponData* newWeaponData);
 	void AsyncLoadMesh();
-	bool GetMeshValid() const { return Mesh.IsValid(); }
 	
 protected:
 	// 무기를 보여줄 메시 컴포넌트.
 	UPROPERTY(VisibleAnywhere, Category = Weapon)
-	TSoftObjectPtr<class USkeletalMeshComponent> Mesh;
-	
-
+	TObjectPtr<class USkeletalMeshComponent> Mesh;
 	
 	// 액터의 충돌을 담당할 박스 컴포넌트
 	UPROPERTY(VisibleAnywhere, Category = Weapon)

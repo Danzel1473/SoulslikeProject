@@ -14,17 +14,21 @@
   <component name="ChangeListManager">
     <list default="true" id="3927419f-cb3e-4ef5-b1ac-cd6a4c87c2de" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LastProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LastProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/CourseFiles/Animations/Dodge/Rolling.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/CourseFiles/Animations/Dodge/Rolling.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/Animation/ABP_PlayerCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/Animation/ABP_PlayerCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Dodge.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Dodge.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/CourseFiles/Animations/HitReactions/Standing_React_Large_Front.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/CourseFiles/Animations/HitReactions/Standing_React_Large_Front.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_LightSwrodCombo.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_LightSwrodCombo.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/BP_Player.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/BP_TestEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/BP_TestEnemy.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Maps/Map1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Maps/Map1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Interface/CharacterItemInterface.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Interface/CharacterItemInterface.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/WeaponBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Items/WeaponBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/WeaponBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Items/WeaponBase.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Player/LockonComponent.h" afterDir="false" />
     </list>
@@ -46,32 +50,28 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://13" root0="FORCE_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://6" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/EnhancedInput/Source/EnhancedInput/Private/InputModifiers.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Editor/GraphEditor/Private/SGraphPin.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Containers/Array.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Math/UnrealMathSSE.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/CoreUObject/Public/UObject/ObjectHandle.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/D3D12RHI/Private/D3D12Util.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/Animation/Skeleton.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/Engine/EngineTypes.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Components/SceneComponent.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Slate/Private/Framework/Docking/TabManager.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_AttackCollision.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_AttackCollision.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/CharacterControlData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/ComboActionData.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/ComboActionData.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/DamageManager.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/DamageManager.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -80,6 +80,8 @@
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Collision/LPCollision.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Game/LPGameMode.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Game/LPGameMode.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/LastProject/Interface/CombatInterface.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/LastProject/Interface/CombatInterface.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Items/ItemData.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Items/ItemData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Items/WeaponBase.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -248,7 +250,8 @@
       <workItem from="1749687526302" duration="12053000" />
       <workItem from="1749774353576" duration="8656000" />
       <workItem from="1750033313606" duration="9381000" />
-      <workItem from="1750051451578" duration="6483000" />
+      <workItem from="1750051451578" duration="18508000" />
+      <workItem from="1750119664987" duration="10393000" />
     </task>
     <servers />
   </component>
