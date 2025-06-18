@@ -6,7 +6,6 @@
 #include "CharacterBase.h"
 #include "InputAction.h"
 #include "InputMappingContext.h"
-#include "LastProject/Items/LPWeapon.h"
 #include "LastProject/Player/LockonComponent.h"
 #include "PlayerCharacter.generated.h"
 
@@ -85,15 +84,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animation)
 	TObjectPtr<UAnimMontage> DodgeAnimMontage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animation)
-	TObjectPtr<UAnimMontage> ComboAttackMontage;
+	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animation)
+	// TObjectPtr<UAnimMontage> ComboAttackMontage;
 	
-	bool bIsDodging;
-	bool bIsAttacking;
-	bool bCanAttack = true;
+	// bool bCanAttack = true;
 
-	UFUNCTION(BlueprintCallable, Category = Combat, meta = (AllowPrivateAccess = "true"))
-	void Attack();
+	// UFUNCTION(BlueprintCallable, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	// virtual void Attack() override;
 	
 	void Guard();
 
@@ -112,37 +109,37 @@ public:
 	// Combat
 protected:
 	// 현재 재생 중인 콤보 단계
-	int32 CurrentCombo = 0;
+	// int32 CurrentCombo = 0;
 
 	// 콤보에 사용할 데이터
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Attack, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<class UComboActionData> ComboActionData;
-	
-	// 콤보 가능 여부를 판단하기 위한 타이머 핸들
-	FTimerHandle ComboTimerHandle;
-	FTimerHandle AttackInputDelayTimerHandle;
+	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	// TObjectPtr<class UComboActionData> ComboActionData;
+	//
+	// // 콤보 가능 여부를 판단하기 위한 타이머 핸들
+	// FTimerHandle ComboTimerHandle;
+	// FTimerHandle AttackInputDelayTimerHandle;
 
-	// 콤보 액션 처리 함수
-	void ProcessComboCommand();
-	
-	void AttackInputDelay();
-
-	// 콤보 액션 시작 함수
-	void ComboActionBegin();
-
-	// 콤보 액션 종료 함수
-	void ComboActionEnd(UAnimMontage* TargetMontage, bool IsProperlyEnded);
-	
-	// NPC가 공격이 끝나는 지점을 알 수 있도록 함수 추가
-	virtual void NotifyComboActionEnd();
-
-	// 콤보 타이머 설정 함수
-	void SetComboCheckTimer();
-
-	// 타이머 시간 사이에 입력이 들어왔는지 여부를 확인하는 함수
-	void ComboCheck();
-
-	void ResetAttackTime();
+	// // 콤보 액션 처리 함수
+	// void ProcessComboCommand();
+	//
+	// void AttackInputDelay();
+	//
+	// // 콤보 액션 시작 함수
+	// void ComboActionBegin();
+	//
+	// // 콤보 액션 종료 함수
+	// void ComboActionEnd(UAnimMontage* TargetMontage, bool IsProperlyEnded);
+	//
+	// // NPC가 공격이 끝나는 지점을 알 수 있도록 함수 추가
+	// virtual void NotifyComboActionEnd();
+	//
+	// // 콤보 타이머 설정 함수
+	// void SetComboCheckTimer();
+	//
+	// // 타이머 시간 사이에 입력이 들어왔는지 여부를 확인하는 함수
+	// void ComboCheck();
+	//
+	// void ResetAttackTime();
 
 	UFUNCTION()
 	void OnWeaponOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

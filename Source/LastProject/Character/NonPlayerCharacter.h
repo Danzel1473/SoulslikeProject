@@ -16,9 +16,15 @@ class LASTPROJECT_API ANonPlayerCharacter : public ACharacterBase
 
 public:
 	ANonPlayerCharacter();
+	virtual void BeginPlay() override;
 
+	// Combat
+public:
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UAnimMontage> HitMontage;
+	// virtual void Attack() override;
+	// void AttackEnd(class UAnimMontage* TargetMontage, bool IsProperlyEnded);
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UAnimMontage> AttackMontage;
 };

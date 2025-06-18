@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "LPPlayerController.h"
 #include "Components/ActorComponent.h"
 #include "LockonComponent.generated.h"
 

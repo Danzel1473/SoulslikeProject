@@ -15,6 +15,7 @@ enum class BattleState : uint8
 	Attacking	UMETA(DisplayName = "Attacking"),
 	Guarding	UMETA(DisplayName = "Guarding"),
 	Dodging		UMETA(DisplayName = "Dodging"),
+	Hit			UMETA(DisplayName = "Hit"),
 };
 
 UCLASS()
@@ -38,7 +39,13 @@ public:
 	virtual void EnableWeaponCollision_Implementation() override;
 	virtual void DisableWeaponCollision_Implementation() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UAnimMontage> HitMontage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animation)
+	TObjectPtr<UAnimMontage> ComboAttackMontage;
 protected:
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	BattleState BattleState;
 	
@@ -51,6 +58,45 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Equipment, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class AWeaponBase> Weapon;
+
+	// Combat
 public:
+	UFUNCTION(BlueprintCallable, Category = Combat)
+	virtual void Attack();
 	
+	virtual void ProcessComboCommand();
+	virtual void ComboActionBegin();
+	void ComboActionEnd(class UAnimMontage* TargetMontage, bool IsProperlyEnded);
+	void AttackInputDelay();
+	void NotifyComboActionEnd();
+	void SetComboCheckTimer();
+	void ComboCheck();
+	void ResetAttackTime();
+
+protected:
+	virtual void HitBegin_Implementation() override;
+	virtual void HitEnd_Implementation() override;
+
+	bool bCanAttack = true;
+
+	// 현재 재생 중인 콤보 단계
+	int32 CurrentCombo = 0;
+
+	// 콤보에 사용할 데이터
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UComboActionData> ComboActionData;
+	
+	// 콤보 가능 여부를 판단하기 위한 타이머 핸들
+	FTimerHandle ComboTimerHandle;
+	FTimerHandle AttackInputDelayTimerHandle;
+
+	bool HasNextComboCommand = false;
+
+	// WalkSpeed
+public:
+	float WalkSpeed = 150.f;
+	float RunSpeed = 300.f;
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeMoveSpeed(float Speed) const;
 };

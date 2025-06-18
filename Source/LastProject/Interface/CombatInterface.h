@@ -28,5 +28,9 @@ public:
 	UFUNCTION(BlueprintNativeEvent)
 	void DisableWeaponCollision();
 	
+	UFUNCTION(BlueprintNativeEvent)
+	void HitBegin();
 
+	UFUNCTION(BlueprintNativeEvent)
+	void HitEnd();
 };
