@@ -3,7 +3,6 @@
 #include "PlayerCharacter.h"
 
 #include "GameFramework/Character.h"
-#include "ComboActionData.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "UObject/ConstructorHelpers.h"
@@ -94,6 +93,12 @@ APlayerCharacter::APlayerCharacter()
 	{
 		DodgeAction = DodgeActionRef.Object;
 	}
+	
+	static ConstructorHelpers::FObjectFinder<UInputAction> ParryActionRef(TEXT("/Game/LastProject/Input/InputAction/IA_Parry.IA_Parry"));
+	if (ParryActionRef.Object)
+	{
+		ParryAction = ParryActionRef.Object;
+	}
 
 	static ConstructorHelpers::FObjectFinder<UAnimMontage> DodgeAnimMontageRef(TEXT("/Game/LastProject/Character/Animation/AM_Dodge.AM_Dodge"));
 	if (DodgeAnimMontageRef.Object)
@@ -144,16 +149,8 @@ void APlayerCharacter::Tick(float DeltaSeconds)
 	}
 }
 
-// void APlayerCharacter::Attack()
-// {
-// 	// 콤보어택 처리
-// 	ProcessComboCommand();
-// }
-
 void APlayerCharacter::Guard()
 {
-	//if (BattleState != BattleState::None || GetMovementComponent()->IsFalling()) return;
-
 	// Todo: 가드 로직
 }
 
@@ -161,6 +158,8 @@ void APlayerCharacter::Move(const FInputActionValue& Value)
 {
 	// 입력 값 읽기
 	FVector2D Movement = Value.Get<FVector2D>();
+
+	if (BattleState != BattleState::None) return;
 
 	if (LockOnComponent && LockOnComponent->GetLockOnMode())
 	{
@@ -173,7 +172,6 @@ void APlayerCharacter::Move(const FInputActionValue& Value)
 	}
 	else
 	{
-
 		// 컨트롤러의 회전 값
 		FRotator Rotation = GetControlRotation();
 		FRotator YawRotation(0.0f, Rotation.Yaw, 0.0f);
@@ -198,38 +196,61 @@ void APlayerCharacter::Look(const FInputActionValue& Value)
 	AddControllerPitchInput(LookVector.Y);
 }
 
-void APlayerCharacter::Dodge(const FInputActionValue& Value)
+void APlayerCharacter::Dodge()
+{
+	if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+	{
+		SetBattleState(BattleState::Dodging);
+		float SpeedRate = 1.2; // 추후 무게 값을 반영
+		
+		// Dodge Montage 실행
+		AnimInstance->Montage_Play(DodgeAnimMontage, SpeedRate);
+
+		// 닷지중에 무적 상태
+		IsInvincible = true;
+
+		// 딜리게이트 추가
+		FOnMontageEnded EndDelegate;
+		EndDelegate.BindUObject(this, &APlayerCharacter::DodgeEnd);
+		
+		AnimInstance->Montage_SetEndDelegate(EndDelegate, DodgeAnimMontage);
+	}
+}
+
+void APlayerCharacter::Parry()
 {
 	if (BattleState == BattleState::None && !GetCharacterMovement()->IsFalling())
 	{
 		if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
 		{
-			BattleState = BattleState::Dodging;
-			float SpeedRate = 1; // 추후 무게 값을 반영
-			AnimInstance->Montage_Play(DodgeAnimMontage, SpeedRate);
-
-			// Todo: 닷지중에 무적 상태 추가
+			BattleState = BattleState::Parrying;
+			float SpeedRate = 1.0; // 추후 무게 값을 반영
+			
+			// Dodge Montage 실행
+			AnimInstance->Montage_Play(ParryAnimMontage, SpeedRate);
 
 			// 딜리게이트 추가
 			FOnMontageEnded EndDelegate;
-			EndDelegate.BindUObject(this, &APlayerCharacter::DodgeEnd);
-			AnimInstance->Montage_SetEndDelegate(EndDelegate, DodgeAnimMontage);
+			EndDelegate.BindUObject(this, &APlayerCharacter::ParryEnd);
+			
+			AnimInstance->Montage_SetEndDelegate(EndDelegate, ParryAnimMontage);
 		}
 	}
-	// Dodge Montage 실행
 }
 
-void APlayerCharacter::Jump(const FInputActionValue& Value)
+void APlayerCharacter::ParryEnd(UAnimMontage* TargetMontage, bool IsProperlyEnded)
 {
-	if (BattleState == BattleState::None)
-	{
-		ACharacter::Jump();
-	}
+	BattleState = BattleState::None;
 }
 
 void APlayerCharacter::DodgeEnd(UAnimMontage* TargetMontage, bool IsProperlyEnded)
 {
+	// 무적 상태 해제
+	IsInvincible = false;
+
+	// 상태 초기화
 	BattleState = BattleState::None;
+
 	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 }
 
@@ -241,8 +262,7 @@ void APlayerCharacter::SetLockOnMovingMode(bool IsLockOnMode)
 		bUseControllerRotationYaw = true;
 		GetCharacterMovement()->bOrientRotationToMovement = false;
 
-		AController* PlayerController = GetController();
-		if (PlayerController)
+		if (GetController())
 		{
 			GetController()->SetIgnoreLookInput(true);
 		}
@@ -252,8 +272,7 @@ void APlayerCharacter::SetLockOnMovingMode(bool IsLockOnMode)
 		bUseControllerRotationYaw = false;
 		GetCharacterMovement()->bOrientRotationToMovement = true;
 
-		AController* PlayerController = GetController();
-		if (PlayerController)
+		if (GetController())
 		{
 			GetController()->SetIgnoreLookInput(false);
 		}
@@ -261,162 +280,9 @@ void APlayerCharacter::SetLockOnMovingMode(bool IsLockOnMode)
 	}
 }
 
-// void APlayerCharacter::ProcessComboCommand()
-// {
-// 	BattleState = BattleState::Attacking;
-// 	if (CurrentCombo == 0)
-// 	{
-// 		ComboActionBegin();
-// 		return;
-// 	}
-//
-// 	if (!ComboTimerHandle.IsValid())
-// 	{
-// 		HasNextComboCommand = false;
-// 	}
-// 	else if (bCanAttack)
-// 	{
-// 		HasNextComboCommand = true;
-// 	}
-// }
-//
-//
-// void APlayerCharacter::ComboActionBegin()
-// {
-// 	CurrentCombo = 1;
-// 	GetCharacterMovement()->SetMovementMode(MOVE_None);
-//
-// 	AttackInputDelay();
-// 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-// 	if (AnimInstance)
-// 	{
-// 		// 추후에 무게에 따른 공격속도 변경
-// 		AnimInstance->Montage_Play(ComboAttackMontage);
-//
-// 		FOnMontageEnded EndDelegate;
-// 		EndDelegate.BindUObject(this, &APlayerCharacter::ComboActionEnd);
-// 		AnimInstance->Montage_SetEndDelegate(EndDelegate, ComboAttackMontage);
-//
-// 		ComboTimerHandle.Invalidate();
-// 		SetComboCheckTimer();
-// 	}
-// }
-//
-// void APlayerCharacter::ComboActionEnd(class UAnimMontage* TargetMontage, bool IsProperlyEnded)
-// {
-// 	// 유효성 검사
-// 	ensure(CurrentCombo != 0);
-//
-// 	// 콤보 초기화
-// 	CurrentCombo = 0;
-//
-// 	BattleState = BattleState::None;
-//
-// 	// 캐릭터 무브먼트 컴포넌트 모드 복구
-// 	GetCharacterMovement()->SetMovementMode(MOVE_Walking);
-//
-// 	// 공격이 끝나면 Notify 호출
-// 	NotifyComboActionEnd();
-// }
-//
-// void APlayerCharacter::NotifyComboActionEnd()
-// {
-// }
-//
-// void APlayerCharacter::SetComboCheckTimer()
-// {
-// 	// 현재 재생 중인 콤보의 인덱스
-// 	int32 ComboIndex = CurrentCombo - 1;
-//
-// 	// 콤보 인덱스 값 검증
-// 	ensure(ComboActionData->EffectiveFrameCount.IsValidIndex(ComboIndex));
-//
-// 	// 콤보 시간 계산 (추후에 공격속도 추가 계산)
-// 	float ComboEffectiveTime = (ComboActionData->EffectiveFrameCount[ComboIndex] / ComboActionData->FrameRate);
-//
-// 	// 타이머 설정
-// 	if (ComboEffectiveTime > 0.0f)
-// 	{
-// 		GetWorld()->GetTimerManager().SetTimer(
-// 			ComboTimerHandle,
-// 			this,
-// 			&APlayerCharacter::ComboCheck,
-// 			ComboEffectiveTime,
-// 			false
-// 			);
-// 	}
-// }
-//
-// void APlayerCharacter::ComboCheck()
-// {
-// 	UE_LOG(LogTemp, Display, TEXT("ComboCheck Start"));
-// 	// 타이머 핸들 무효화
-// 	ComboTimerHandle.Invalidate();
-//
-// 	// 이전 공격 입력 확인
-// 	if (HasNextComboCommand)
-// 	{
-// 		UE_LOG(LogTemp, Display, TEXT("ComboCheck OK"));
-//
-// 		// 몽타주 점프 처리
-// 		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-//
-// 		if (AnimInstance)
-// 		{
-// 			// 다음 콤보 인덱스 설정
-// 			CurrentCombo = FMath::Clamp(CurrentCombo + 1, 1, ComboActionData->MaxComboCount);
-//
-// 			// 점프할 섹션의 이름 설정
-// 			FName NextSection = *FString::Printf(TEXT("%s%d"), *ComboActionData->MontageSectionNamePrefix, CurrentCombo);
-//
-// 			// 섹션 점프
-// 			AnimInstance->Montage_JumpToSection(NextSection, ComboAttackMontage);
-//
-// 			// 콤보 인풋 딜레이 설정
-// 			AttackInputDelay();
-// 			
-// 			// 다음 콤보 공격을 위한 타이머 설정
-// 			SetComboCheckTimer();
-//
-// 			// 콤보 입력 플래그 초기화
-// 			HasNextComboCommand = false;
-// 		}
-// 	}
-// }
-//
-// void APlayerCharacter::AttackInputDelay()
-// {
-// 	// 현재 재생 중인 콤보의 인덱스
-// 	int32 ComboIndex = CurrentCombo - 1;
-//
-// 	// 콤보 인덱스 값 검증
-// 	ensure(ComboActionData->EffectiveFrameCount.IsValidIndex(ComboIndex));
-//
-// 	// 콤보 입력 딜레이 계산
-// 	float ComboEffectiveTime = (ComboActionData->EffectiveFrameCount[ComboIndex] / ComboActionData->FrameRate) / 3;
-// 	
-// 	// 어택 딜레이 플래그 설정
-// 	bCanAttack = false;
-// 	
-// 	// 어택 딜레이 타이머 설정
-// 	GetWorld()->GetTimerManager().SetTimer(
-// 		AttackInputDelayTimerHandle,
-// 		this,
-// 		 &APlayerCharacter::ResetAttackTime,
-// 		ComboEffectiveTime,
-// 		false
-// 	);
-// }
-//
-// void APlayerCharacter::ResetAttackTime()
-// {
-// 	bCanAttack = true;
-// }
-
 void APlayerCharacter::OnWeaponOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogInput, Log, TEXT("Overlapped"));
 	if (OtherActor == this) return;
 
 	ANonPlayerCharacter* HitEnemy = Cast<ANonPlayerCharacter>(OtherActor);
@@ -434,16 +300,18 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	auto EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
 
 	// 바인딩
-	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Jump);
 	EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
-	//EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Attack);
-	EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Dodge);
 	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Move);
 
 }
 
-float APlayerCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
-	class AController* EventInstigator, AActor* DamageCauser)
+float APlayerCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (PlayerController && CameraShakeClass)
+	{
+		PlayerController->PlayerCameraManager->StartCameraShake(CameraShakeClass);
+	}
+	
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }

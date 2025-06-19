@@ -21,5 +21,5 @@ protected:
 	virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 	
 	UPROPERTY(EditAnywhere, Category = "AI")
-	float CanAttackRange = 100.f;
+	float CanAttackRange = 200.f;
 };

@@ -22,7 +22,7 @@ void UBTService_CheckAttackRange::TickNode(UBehaviorTreeComponent& OwnerComp, ui
 	AActor* Target = Cast<AActor>(BB->GetValueAsObject("TargetObject"));
 	if (!Target || ! AIPawn) return;
 
-	float Distance = FVector::Dist(Target->GetActorLocation(), AIPawn->GetActorLocation());
+	float Distance = AIPawn->GetDistanceTo(Target);
 	bool bInRange = Distance < CanAttackRange;
 	
 	BB->SetValueAsBool("bIsInAttackRange", bInRange);

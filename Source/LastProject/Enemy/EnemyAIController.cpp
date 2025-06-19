@@ -4,9 +4,9 @@
 #include "EnemyAIController.h"
 
 #include "TimerManager.h"
-#include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "LastProject/Character/CharacterBase.h"
+#include "LastProject/Character/PlayerCharacter.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
 
@@ -30,7 +30,7 @@ AEnemyAIController::AEnemyAIController()
 void AEnemyAIController::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	if (BehaviorTree)
 	{
 		RunBehaviorTree(BehaviorTree);
@@ -44,6 +44,8 @@ void AEnemyAIController::BeginPlay()
 
 void AEnemyAIController::OnTargetPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
 {
+	APlayerCharacter* PC = Cast<APlayerCharacter>(Actor);
+	if (!PC) return;
 	if (Stimulus.WasSuccessfullySensed())
 	{
 		if (GetBlackboardComponent())

@@ -16,4 +16,5 @@ class LASTPROJECT_API ALPPlayerController : public APlayerController
 
 public:
 	virtual void BeginPlay() override;
+
 };

@@ -4,7 +4,6 @@
 #include "AnimNotifyState_AttackCollision.h"
 
 #include "Components/SkeletalMeshComponent.h"
-#include "GameFramework/Character.h"
 #include "LastProject/Character/CharacterBase.h"
 
 

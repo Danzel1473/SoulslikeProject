@@ -1,26 +1,28 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "BTTask_TurnToTarget.h"
-
+#include "BTService_TurnToTarget.h"
 #include "AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "LastProject/Character/CharacterBase.h"
+#include "LastProject/Character/NonPlayerCharacter.h"
 
-UBTTask_TurnToTarget::UBTTask_TurnToTarget()
+class ACharacterBase;
+
+UBTService_TurnToTarget::UBTService_TurnToTarget()
 {
-	NodeName = TEXT("Turn");
+	Interval = 0.1f;
 }
 
-EBTNodeResult::Type UBTTask_TurnToTarget::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+void UBTService_TurnToTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
-	EBTNodeResult::Type Result = Super::ExecuteTask(OwnerComp, NodeMemory);
+	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
 	// AiController가 제어하는 폰
 	APawn* ControllingPawn = OwnerComp.GetAIOwner()->GetPawn();
-	//if (ControllingPawn == nullptr)
 	if (!ControllingPawn)
 	{
-		return EBTNodeResult::Failed;
+		return;
 	}
 
 	// 플레이어
@@ -29,11 +31,13 @@ EBTNodeResult::Type UBTTask_TurnToTarget::ExecuteTask(UBehaviorTreeComponent& Ow
 
 	if (!TargetPawn)
 	{
-		return EBTNodeResult::Failed;
+		return;
 	}
 	
 	// 회전할 속도 값
-	float TurnSpeed = 240.f;
+	ANonPlayerCharacter* Character = Cast<ANonPlayerCharacter>(OwnerComp.GetAIOwner()->GetPawn());
+
+	float TurnSpeed = Character->GetAITurnSpeed();
 
 	// 바라볼 방향 구하기
 	FVector LookVector
@@ -56,7 +60,4 @@ EBTNodeResult::Type UBTTask_TurnToTarget::ExecuteTask(UBehaviorTreeComponent& Ow
 
 	// 회전 값 설정
 	ControllingPawn->SetActorRotation(CurrentRot);
-
-	// 종료
-	return EBTNodeResult::Succeeded;
 }

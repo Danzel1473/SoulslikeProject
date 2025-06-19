@@ -5,9 +5,11 @@
 
 #include "CharacterControlData.h"
 #include "ComboActionData.h"
+#include "NonPlayerCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
 ACharacterBase::ACharacterBase()
@@ -19,6 +21,7 @@ ACharacterBase::ACharacterBase()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
+
 
 	// 
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -42,13 +45,14 @@ ACharacterBase::ACharacterBase()
 
 	WeaponCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("WeaponCollision"));
 	WeaponCollision->SetupAttachment(WeaponMesh);
-	WeaponCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 }
 
 void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
+	WeaponCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
 }
 
 void ACharacterBase::Tick(float DeltaTime)
@@ -56,9 +60,21 @@ void ACharacterBase::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-float ACharacterBase::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
-	class AController* EventInstigator, AActor* DamageCauser)
+float ACharacterBase::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
+	if (HitMontage)
+	{
+		if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+		{
+			// 현재 재생중인 몽타주 전부 종료
+			AnimInstance->StopAllMontages(0.1f);
+			// 피격 몽타주 재생
+			AnimInstance->Montage_Play(HitMontage, 1.5);
+		}
+	}
+
+	// Todo: 데미지 계산 처리
+	
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
 
@@ -106,6 +122,7 @@ void ACharacterBase::HitBegin_Implementation()
 	ICombatInterface::HitBegin_Implementation();
 
 	BattleState = BattleState::Hit;
+	IsParryable = false;
 	GetCharacterMovement()->SetMovementMode(MOVE_None);
 }
 
@@ -115,6 +132,10 @@ void ACharacterBase::HitEnd_Implementation()
 	
 	BattleState = BattleState::None;
 	GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+}
+
+void ACharacterBase::ParriedEnd(class UAnimMontage* TargetMontage, bool IsProperlyEnded)
+{
 }
 
 void ACharacterBase::Attack()
@@ -144,8 +165,8 @@ void ACharacterBase::ProcessComboCommand()
 void ACharacterBase::ComboActionBegin()
 {
 	CurrentCombo = 1;
-	GetCharacterMovement()->SetMovementMode(MOVE_None);
-
+	BattleState = BattleState::Attacking;
+	
 	AttackInputDelay();
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	if (AnimInstance)
@@ -170,10 +191,10 @@ void ACharacterBase::ComboActionEnd(class UAnimMontage* TargetMontage, bool IsPr
 	// 콤보 초기화
 	CurrentCombo = 0;
 
+	// 캐릭터 무브먼트 컴포넌트 모드 복구
 	BattleState = BattleState::None;
 
-	// 캐릭터 무브먼트 컴포넌트 모드 복구
-	GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+	//GetCharacterMovement()->SetMovementMode(MOVE_Walking);
 
 	// 공격이 끝나면 Notify 호출
 	NotifyComboActionEnd();
@@ -278,6 +299,3 @@ void ACharacterBase::ChangeMoveSpeed(const float Speed) const
 	GetCharacterMovement()->MaxWalkSpeed = Speed;
 	UE_LOG(LogInput, Log, TEXT("Walking speed: %f"), Speed);
 }
-
-
-

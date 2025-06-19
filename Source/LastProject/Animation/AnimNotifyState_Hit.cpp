@@ -4,6 +4,7 @@
 #include "AnimNotifyState_Hit.h"
 
 #include "LastProject/Character/CharacterBase.h"
+#include "LastProject/Interface/CharacterAIInterface.h"
 
 class ACharacterBase;
 
@@ -13,16 +14,19 @@ void UAnimNotifyState_Hit::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSe
 	Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
 	ACharacterBase* Owner = Cast<ACharacterBase>(MeshComp->GetOwner());
 
-	UAnimInstance* AnimInstance = Owner->GetMesh()->GetAnimInstance();
+	//UAnimInstance* AnimInstance = Owner->GetMesh()->GetAnimInstance();
 
 	if (!Owner) return;
+	Owner->SetBattleState(BattleState::Hit);
+	
 	if (Owner->Implements<UCombatInterface>())
 	{
-		AnimInstance->StopAllMontages(0.1f);
-		if (Owner->HitMontage)
-		{
-			AnimInstance->Montage_Play(Owner->HitMontage);
-		}
+		// AnimInstance->StopAllMontages(0.1f);
+		// if (Owner->HitMontage)
+		// {
+		// 	AnimInstance->Montage_Play(Owner->HitMontage);
+		// }
+		
 		ICombatInterface::Execute_HitBegin(Owner);
 	}
 }
@@ -34,8 +38,11 @@ void UAnimNotifyState_Hit::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequ
 	ACharacterBase* Owner = Cast<ACharacterBase>(MeshComp->GetOwner());
 
 	if (!Owner) return;
+	Owner->SetBattleState(BattleState::None);
+	
 	if (Owner->Implements<UCombatInterface>())
 	{
+
 		ICombatInterface::Execute_HitEnd(Owner);
 	}
 }
