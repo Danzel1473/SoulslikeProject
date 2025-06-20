@@ -223,8 +223,8 @@ void APlayerCharacter::Parry()
 	{
 		if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
 		{
-			BattleState = BattleState::Parrying;
-			float SpeedRate = 1.0; // 추후 무게 값을 반영
+			BattleState = BattleState::ParryMotion;
+			float SpeedRate = 0.7; // 추후 무게 값을 반영
 			
 			// Dodge Montage 실행
 			AnimInstance->Montage_Play(ParryAnimMontage, SpeedRate);

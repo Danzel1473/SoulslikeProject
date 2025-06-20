@@ -26,5 +26,5 @@ void UAnimNotifyState_Parry::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSe
 
 	if (!Owner) return;
 
-	Owner->SetBattleState(BattleState::None);
+	Owner->SetBattleState(BattleState::ParryMotion);
 }

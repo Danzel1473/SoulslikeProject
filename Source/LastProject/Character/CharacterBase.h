@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CharacterStatData.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/Character.h"
 #include "LastProject/Interface/CombatInterface.h"
@@ -17,6 +18,7 @@ enum class BattleState : uint8
 	Dodging		UMETA(DisplayName = "Dodging"),
 	Hit			UMETA(DisplayName = "Hit"),
 	Parrying	UMETA(DisplayName = "Parrying"),
+	ParryMotion	UMETA(DisplayName = "ParryMotion"),
 	Parried		UMETA(DisplayName = "Parried"),
 
 };
@@ -30,10 +32,8 @@ public:
 	// Sets default values for this character's properties
 	ACharacterBase();
 
-	void BeginPlay() override;
-
-	void Tick(float DeltaTime) override;
-
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;	
 	virtual void SetCharacterControlData(const class UCharacterControlData* InCharacterControlData);
@@ -52,21 +52,18 @@ public:
 
 	void SetBattleState(const BattleState NewState) { BattleState = NewState; }
 	BattleState GetBattleState() const { return BattleState; }
-protected:
 	
+protected:
+	// 각종 동작에 필요한 상태값
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	BattleState BattleState = BattleState::None;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Equipment, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<USkeletalMeshComponent> WeaponMesh; 
-	
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Equipment, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UBoxComponent> WeaponCollision;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Equipment, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<class AWeaponBase> Weapon;
-
 	// Combat
 public:
 	UFUNCTION(BlueprintCallable, Category = Combat)

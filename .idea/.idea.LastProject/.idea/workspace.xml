@@ -13,43 +13,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3927419f-cb3e-4ef5-b1ac-cd6a4c87c2de" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Animations/Source/Boss_Parried_RM.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/Montage/AM_DoubleAttack.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/Montage/AM_LanceBossHit.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/Montage/AM_LanceBossParried.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/Source/LanceBoss_Parried.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parried.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parried.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LastProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LastProject/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BossAnimationsPack/Animations/Attacks/BossDoubleAttack2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BossAnimationsPack/Animations/Attacks/BossDoubleAttack2.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Hit.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Hit.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BossyEnemy/Animations/InPlace/Boss_Parried_InP.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BossyEnemy/Animations/InPlace/Boss_Parried_InP.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BossyEnemy/Animations/RootMotion/Boss_Parried_RM.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BossyEnemy/Animations/RootMotion/Boss_Parried_RM.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/UE5/SKM_Executioner_UE5.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/UE5/SKM_Executioner_UE5.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Dodge.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Dodge.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Parry.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Parry.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/BP_Player.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/BP_PlayerController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/BP_PlayerController.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Combat/ComboData/ABA_LightSwordComboData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Combat/ComboData/ABA_LightSwordComboData.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Animations/AM_Parried.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Animations/AM_Parried.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/AI/BT_Boss_Lance.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/AI/BT_Boss_Lance.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/AM_DoubleAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/AM_DoubleAttack.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/AM_LanceBossHit.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/AM_LanceBossHit.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/BP_BossLance.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/BP_BossLance.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/AI/BB_Grunt.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/AI/BB_Grunt.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/AI/BT_Grunt.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/AI/BT_Grunt.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/Animation/AM_GruntAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/Animation/AM_GruntAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/BP_Grunt.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/BP_Grunt.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Input/IMC_PlayerCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Input/IMC_PlayerCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Maps/Map1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Maps/Map1.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LastProject.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/LastProject.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_AttackCollision.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_AttackCollision.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTDecorator_CheckBattleState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/AI/BTDecorator_CheckBattleState.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTTask_GruntAttack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/AI/BTTask_GruntAttack.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Hit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Hit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parry.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parry.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/DamageManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/DamageManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/DamageManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/DamageManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Enemy/BTService_CheckAttackRange.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Enemy/BTService_CheckAttackRange.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Enemy/BTService_DetectPlayer.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Enemy/BTService_DetectPlayer.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Enemy/BTService_UpdateTargetLocation.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Enemy/BTService_UpdateTargetLocation.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Enemy/BTTask_GruntAttack.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Enemy/BTTask_GruntAttack.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Enemy/BTTask_TurnToTarget.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Enemy/BTTask_TurnToTarget.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Enemy/EnemyAIController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Enemy/EnemyAIController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/LastProject.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/LastProject.Build.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Player/LPPlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Player/LPPlayerController.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,26 +60,49 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://6" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://7" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/Animation/GameplayInsights/Source/GameplayInsights/Private/MontagesTrack.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/EnhancedInput/Source/EnhancedInput/Private/InputModifiers.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/Experimental/Animation/ContextualAnimation/Source/ContextualAnimationEditor/Private/ContextualAnimViewModel.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/MovieScene/MoviePipelineMaskRenderPass/Source/MoviePipelineMaskRenderPass/Private/MovieRenderOverlappedMask.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/MovieScene/MovieRenderPipeline/Source/MovieRenderPipelineCore/Private/MovieRenderOverlappedImage.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/MovieScene/MovieRenderPipeline/Source/MovieRenderPipelineCore/Public/MovieRenderOverlappedImage.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/Online/OnlineFramework/Source/Party/Private/Party/SocialParty.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/Runtime/CommonUI/Source/CommonUI/Private/Input/CommonUIActionRouterBase.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/Runtime/Soundscape/Source/SoundScape/Private/SoundscapeColor.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/Runtime/StateTree/Source/StateTreeModule/Public/StateTreeInstanceData.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/Runtime/ZoneGraph/Source/ZoneGraph/Private/ZoneGraphRenderingComponent.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Developer/DirectoryWatcher/Private/Windows/DirectoryWatchRequestWindows.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Developer/Windows/LiveCoding/Private/External/LC_Commands.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Editor/AnimGraph/Private/AnimStateTransitionNode.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Editor/GraphEditor/Private/SGraphPin.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Editor/MovieSceneTools/Private/AutomatedLevelSequenceCapture.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Containers/Array.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Math/UnrealMathSSE.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Microsoft/MinimalWindowsApi.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/CoreUObject/Public/UObject/ObjectHandle.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/D3D12RHI/Private/D3D12Util.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/Animation/AnimInstance.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/Animation/Skeleton.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/Engine/DamageEvents.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/Engine/EngineTypes.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/GameFramework/Pawn.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Actor.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Animation/AnimInstance.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Character.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Components/SceneComponent.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/GameModeBase.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/GameStateBase.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Pawn.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/WorldSettings.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Experimental/Chaos/Public/GeometryCollection/GeometryCollectionAlgo.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/HeadMountedDisplay/Public/IHeadMountedDisplay.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Launch/Private/LaunchEngineLoop.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Launch/Private/Windows/LaunchWindows.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/NavigationSystem/Private/NavLinkCustomComponent.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/RHI/Public/GPUDefragAllocator.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Slate/Private/Framework/Docking/TabManager.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/ThirdParty/AMD/Amf/AdvancedMediaFramework_(AMF)_SDK.tps" root0="FORCE_HIGHLIGHTING" />
@@ -96,6 +114,8 @@
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_AttackCollision.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Hit.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Hit.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parried.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parried.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parry.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parry.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parryable.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -106,6 +126,8 @@
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/CharacterControlData.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/CharacterStatData.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/CharacterStatData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/ComboActionData.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/ComboActionData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/DamageManager.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -297,7 +319,11 @@
       <workItem from="1750205845476" duration="3454000" />
       <workItem from="1750229518822" duration="13860000" />
       <workItem from="1750292521748" duration="7531000" />
-      <workItem from="1750301794572" duration="23863000" />
+      <workItem from="1750301794572" duration="24293000" />
+      <workItem from="1750378782065" duration="7608000" />
+      <workItem from="1750386454155" duration="264000" />
+      <workItem from="1750386751246" duration="217000" />
+      <workItem from="1750387215549" duration="8547000" />
     </task>
     <servers />
   </component>

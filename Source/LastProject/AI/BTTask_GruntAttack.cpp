@@ -37,19 +37,22 @@ EBTNodeResult::Type UBTTask_GruntAttack::ExecuteTask(UBehaviorTreeComponent& Own
 	{
 		return EBTNodeResult::Failed;
 	}
-	
-	FAICharacterAttackFinished OnAttackFinished;
 
-	OnAttackFinished.BindLambda(
-		[&]()
-		{
-			FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
-		}
-	);
+	if (OwnerCharacter->GetBattleState() == BattleState::None)
+	{
+		FAICharacterAttackFinished OnAttackFinished;
 
-	AIPawn->SetAIAttackDelegeate(OnAttackFinished);
-	
-	AIPawn->AttackByAI();
+		OnAttackFinished.BindLambda(
+			[&]()
+			{
+				FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+			}
+		);
+
+		AIPawn->SetAIAttackDelegeate(OnAttackFinished);
+		
+		AIPawn->AttackByAI();
+	}
 
 	return EBTNodeResult::InProgress;
 }

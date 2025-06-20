@@ -15,7 +15,10 @@ bool UBTDecorator_CheckBattleState::CalculateRawConditionValue(UBehaviorTreeComp
 	uint8* NodeMemory) const
 {
 	ACharacterBase* Character = Cast<ACharacterBase>(OwnerComp.GetAIOwner()->GetPawn());
-	if (!Character) return false;
+	if (!Character)
+	{
+		return false;
+	}
 
 	return Character->GetBattleState() == BattleState::None;
 }

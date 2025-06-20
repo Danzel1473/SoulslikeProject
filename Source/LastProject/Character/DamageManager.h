@@ -13,24 +13,44 @@ class LASTPROJECT_API UDamageManager : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
+public:
 	UDamageManager();
+	
+protected:	
+	// Sets default values for this component's properties
+	virtual void BeginPlay() override;
 
+public:
 	UPROPERTY(BlueprintAssignable)
 	FOnHitAttack OnHitAttack;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UCharacterStatData> StatData;
+
+	// HP
 public:
-	void HitAttack(AActor* Attacker, float Damage);
+	void SetMaxHealth(const int32 HealthStat);
+	void SetCurrentHealth(const int32 Health);
+	
+	void HitAttack(int32 Damage);
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+	UPROPERTY(EditAnywhere)
+	int32 MaxHealth;
+	
+	UPROPERTY(EditAnywhere)
+	int32 CurrentHealth;
+
+	// Stamina
+public:
+	UFUNCTION(BlueprintCallable)
+	void SetMaxStamina(const int32 StaminaStat);
+	void SetCurrentStamina(const int32 Stamina);
 	
 protected:
 	UPROPERTY(EditAnywhere)
-	float HealthPoint;
-
+	int32 MaxStamina;
+	
 	UPROPERTY(EditAnywhere)
-	float Stamina;
+	int32 CurrentStamina;
 };

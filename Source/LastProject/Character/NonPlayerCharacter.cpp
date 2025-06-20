@@ -3,6 +3,7 @@
 
 #include "NonPlayerCharacter.h"
 
+#include "DamageManager.h"
 #include "PlayerCharacter.h"
 #include "Animation/AnimInstance.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -54,35 +55,35 @@ void ANonPlayerCharacter::OnWeaponOverlapBegin(UPrimitiveComponent* OverlappedCo
 
 	if (HitPlayer->GetBattleState() == BattleState::Parrying && IsParryable)
 	{
+		SetParryable(false);
 		if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
 		{
-			AnimInstance->StopAllMontages(0.1f);
+			AnimInstance->Montage_Stop(0.2f, AnimInstance->GetCurrentActiveMontage());
 
 			if (ParriedMontage)
 			{
-				SetBattleState(BattleState::Parried);
-				UE_LOG(LogTemp, Log, TEXT("BattleState Num: %d"), BattleState);
-				AnimInstance->Montage_Play(ParriedMontage, 0.5f);
+				AnimInstance->Montage_Play(ParriedMontage, 1.f);
+				
+				// FOnMontageEnded EndDelegate;
+				// EndDelegate.BindUObject(this, &ANonPlayerCharacter::ParriedEnd);
+				// AnimInstance->Montage_SetEndDelegate(EndDelegate, ParriedMontage);
 			}
-			
-			FOnMontageEnded EndDelegate;
-			EndDelegate.BindUObject(this, &ANonPlayerCharacter::ParriedEnd);
-			AnimInstance->Montage_SetEndDelegate(EndDelegate, ParriedMontage);
 		}
 	}
 	else
 	{
 		// 테스트용 임시 데미지
-		float DamageAmount = 10.f;
-		UGameplayStatics::ApplyDamage(OtherActor, DamageAmount, GetController(), this, UDamageType::StaticClass());
+		//int32 DamageAmount = DamageManager->StatData->PowerStat;
+		int32 DamageAmount = 10;
+		UGameplayStatics::ApplyDamage(OtherActor, static_cast<float>(DamageAmount), GetController(), this, UDamageType::StaticClass());
 	}
 }
 
 void ANonPlayerCharacter::ParriedEnd(class UAnimMontage* TargetMontage, bool IsProperlyEnded)
 {
-	Super::ParriedEnd(TargetMontage, IsProperlyEnded);
-
+	UE_LOG(LogInput, Log, TEXT("ParriedEnd"));
 	SetBattleState(BattleState::None);
+	//SetParryable(false);
 }
 
 void ANonPlayerCharacter::SetAIAttackDelegeate(const FAICharacterAttackFinished& InOnAttackFinished)
@@ -98,10 +99,6 @@ void ANonPlayerCharacter::AttackByAI()
 
 void ANonPlayerCharacter::FoucsRandomMove()
 {
-	if (BattleState == BattleState::None)
-	{
-		
-	}
 }
 
 void ANonPlayerCharacter::NotifyComboActionEnd()

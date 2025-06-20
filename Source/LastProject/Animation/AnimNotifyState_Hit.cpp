@@ -13,19 +13,17 @@ void UAnimNotifyState_Hit::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSe
 {
 	Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
 	ACharacterBase* Owner = Cast<ACharacterBase>(MeshComp->GetOwner());
-
-	//UAnimInstance* AnimInstance = Owner->GetMesh()->GetAnimInstance();
-
+	
 	if (!Owner) return;
+	
 	Owner->SetBattleState(BattleState::Hit);
+	UE_LOG(LogTemp, Warning, TEXT("CalledFunction: %s / BattleState: %s"),
+	TEXT(__FUNCTION__),
+	*UEnum::GetValueAsString(Owner->GetBattleState())
+	);
 	
 	if (Owner->Implements<UCombatInterface>())
 	{
-		// AnimInstance->StopAllMontages(0.1f);
-		// if (Owner->HitMontage)
-		// {
-		// 	AnimInstance->Montage_Play(Owner->HitMontage);
-		// }
 		
 		ICombatInterface::Execute_HitBegin(Owner);
 	}

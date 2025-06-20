@@ -5,6 +5,7 @@
 
 #include "CharacterControlData.h"
 #include "ComboActionData.h"
+#include "DamageManager.h"
 #include "NonPlayerCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -30,6 +31,8 @@ ACharacterBase::ACharacterBase()
 
 	GetCapsuleComponent()->SetCapsuleHalfHeight(88.0f);
 
+	//DamageManager = CreateDefaultSubobject<UDamageManager>(TEXT("DamageManager"));
+	
 	BattleState = BattleState::None;
 
 	// 
@@ -67,13 +70,17 @@ float ACharacterBase::TakeDamage(float DamageAmount, FDamageEvent const& DamageE
 		if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
 		{
 			// 현재 재생중인 몽타주 전부 종료
-			AnimInstance->StopAllMontages(0.1f);
+			AnimInstance->Montage_Stop(0.1f, AnimInstance->GetCurrentActiveMontage());
 			// 피격 몽타주 재생
 			AnimInstance->Montage_Play(HitMontage, 1.5);
 		}
 	}
 
 	// Todo: 데미지 계산 처리
+	// if (DamageManager)
+	// {
+	// 	DamageManager->HitAttack(static_cast<int32>(DamageAmount));
+	// }
 	
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
@@ -121,17 +128,16 @@ void ACharacterBase::HitBegin_Implementation()
 {
 	ICombatInterface::HitBegin_Implementation();
 
-	BattleState = BattleState::Hit;
+	SetBattleState(BattleState::Hit);
 	IsParryable = false;
-	GetCharacterMovement()->SetMovementMode(MOVE_None);
+	IsInvincible = false;
 }
 
 void ACharacterBase::HitEnd_Implementation()
 {
 	ICombatInterface::HitEnd_Implementation();
 	
-	BattleState = BattleState::None;
-	GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+	SetBattleState(BattleState::None);
 }
 
 void ACharacterBase::ParriedEnd(class UAnimMontage* TargetMontage, bool IsProperlyEnded)
@@ -145,7 +151,8 @@ void ACharacterBase::Attack()
 
 void ACharacterBase::ProcessComboCommand()
 {
-	BattleState = BattleState::Attacking;
+
+	
 	if (CurrentCombo == 0)
 	{
 		ComboActionBegin();
@@ -165,8 +172,9 @@ void ACharacterBase::ProcessComboCommand()
 void ACharacterBase::ComboActionBegin()
 {
 	CurrentCombo = 1;
+
 	BattleState = BattleState::Attacking;
-	
+
 	AttackInputDelay();
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	if (AnimInstance)
@@ -262,6 +270,7 @@ void ACharacterBase::ComboCheck()
 	if (HasNextComboCommand)
 	{
 		UE_LOG(LogTemp, Display, TEXT("ComboCheck OK"));
+		BattleState = BattleState::Attacking;
 
 		// 몽타주 점프 처리
 		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
