@@ -13,38 +13,61 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3927419f-cb3e-4ef5-b1ac-cd6a4c87c2de" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Animations/Source/Boss_Parried_RM.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/Montage/AM_DoubleAttack.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/Montage/AM_LanceBossHit.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/Montage/AM_LanceBossParried.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/Source/LanceBoss_Parried.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parried.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parried.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/Montage/AM_DodgeAttack.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/Animation/AM_GruntDeath.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/DA_Grunt.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LastProject/ui/WBP_EnemyHPBar.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LastProject/ui/WBP_PlayerWidget.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LastProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LastProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BossyEnemy/Animations/InPlace/Boss_Parried_InP.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BossyEnemy/Animations/InPlace/Boss_Parried_InP.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BossyEnemy/Animations/RootMotion/Boss_Parried_RM.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BossyEnemy/Animations/RootMotion/Boss_Parried_RM.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/UE5/SKM_Executioner_UE5.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/UE5/SKM_Executioner_UE5.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Dodge.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Dodge.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Parry.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_Parry.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/Lance/SKM_Executioner_Lance.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/Lance/SKM_Executioner_Lance.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/UE5/SK_Mannequin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/EXECUTIONER/MESHES/UE5/SK_Mannequin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_LightSwrodCombo.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/Animation/AM_LightSwrodCombo.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/BP_Player.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Animations/AM_Parried.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Animations/AM_Parried.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Character/DA_PlayerStat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Character/DA_PlayerStat.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/AI/BT_Boss_Lance.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/AI/BT_Boss_Lance.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/AM_DoubleAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/AM_DoubleAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/AM_LanceBossHit.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/AM_LanceBossHit.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/Montage/AM_DoubleAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/Animation/Montage/AM_DoubleAttack.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/BP_BossLance.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Boss_Lance/BP_BossLance.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/AI/BT_Grunt.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/AI/BT_Grunt.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/Animation/ABP_Grunt.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/Animation/ABP_Grunt.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/Animation/AM_GruntAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/Animation/AM_GruntAttack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/BP_Grunt.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Enemy/Grunt/BP_Grunt.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LastProject/Maps/Map1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LastProject/Maps/Map1.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_01.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LastProject.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/LastProject.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTDecorator_CheckBattleState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/AI/BTDecorator_CheckBattleState.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTTask_GruntAttack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/AI/BTTask_GruntAttack.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Hit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Hit.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parry.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parry.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTDecorator_CheckBattleState.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTDecorator_CheckBattleState.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTService_DetectPlayer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTService_DetectPlayer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTService_UpdateTargetLocation.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTService_UpdateTargetLocation.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTTask_TurnToTarget.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/AI/BTTask_TurnToTarget.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/BTTask_FocusRandomMove.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/BTTask_FocusRandomMove.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/CharacterStatData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/CharacterStatData.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/DamageManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/DamageManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/DamageManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/DamageManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Collision/LPCollision.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Collision/LPCollision.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Interface/CharacterItemInterface.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Interface/CharacterItemInterface.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/ItemData.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/ItemData.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/LPWeapon.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/LPWeapon.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/WeaponBase.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/WeaponBase.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/WeaponData.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/Items/WeaponData.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LastProject/LastProject.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LastProject/LastProject.Build.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,11 +81,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://7" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/Animation/GameplayInsights/Source/GameplayInsights/Private/MontagesTrack.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/EnhancedInput/Source/EnhancedInput/Private/InputModifiers.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Plugins/Experimental/Animation/ContextualAnimation/Source/ContextualAnimationEditor/Private/ContextualAnimViewModel.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -93,6 +111,7 @@
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Actor.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Animation/AnimInstance.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Character.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Components/ActorComponent.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Components/SceneComponent.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/GameModeBase.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/GameStateBase.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -106,8 +125,6 @@
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/RHI/Public/GPUDefragAllocator.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Slate/Private/Framework/Docking/TabManager.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.4/Engine/Source/ThirdParty/AMD/Amf/AdvancedMediaFramework_(AMF)_SDK.tps" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/AI/BTDecorator_CheckBattleState.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/AI/BTDecorator_CheckBattleState.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/AI/BTService_TurnToTarget.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/AI/BTService_TurnToTarget.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_AttackCollision.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -121,8 +138,6 @@
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parryable.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/AnimNotifyState_Parryable.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Animation/LPAnimInstance.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/BTTask_FocusRandomMove.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/BTTask_FocusRandomMove.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/CharacterBase.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/CharacterControlData.h" root0="FORCE_HIGHLIGHTING" />
@@ -136,20 +151,12 @@
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/NonPlayerCharacter.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Character/PlayerCharacter.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/Collision/LPCollision.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/Collision/LPCollision.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Enemy/EnemyAIController.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Enemy/EnemyAIController.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Game/LPGameMode.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Game/LPGameMode.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Interface/CombatInterface.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Interface/CombatInterface.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/Items/ItemData.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/Items/ItemData.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/Items/WeaponBase.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/Items/WeaponBase.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/Items/WeaponData.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/LastProject/Items/WeaponData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Player/CameraShakeClass.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Player/CameraShakeClass.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/LastProject/Player/LPPlayerController.h" root0="FORCE_HIGHLIGHTING" />
@@ -323,7 +330,13 @@
       <workItem from="1750378782065" duration="7608000" />
       <workItem from="1750386454155" duration="264000" />
       <workItem from="1750386751246" duration="217000" />
-      <workItem from="1750387215549" duration="8547000" />
+      <workItem from="1750387215549" duration="12690000" />
+      <workItem from="1750401439866" duration="14057000" />
+      <workItem from="1750425620354" duration="18000" />
+      <workItem from="1750425675460" duration="475000" />
+      <workItem from="1750426193895" duration="7000" />
+      <workItem from="1750426230756" duration="246000" />
+      <workItem from="1750426565361" duration="205000" />
     </task>
     <servers />
   </component>

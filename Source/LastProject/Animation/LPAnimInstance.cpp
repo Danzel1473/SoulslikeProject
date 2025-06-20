@@ -11,6 +11,7 @@ ULPAnimInstance::ULPAnimInstance()
 	// 문턱 값 설정.
 	MovingThreshold = 3.0f;
 	JumpingThreshold = 100.0f;
+	bIsDead = false;
 }
 
 void ULPAnimInstance::NativeInitializeAnimation()

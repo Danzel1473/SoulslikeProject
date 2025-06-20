@@ -128,5 +128,15 @@ protected:
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
 	TSubclassOf<UCameraShakeBase> CameraShakeClass;
+
+	// UI
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = UI)
+	TSubclassOf<class UUserWidget> PlayerHUDClass;
+
+	void ShowBossHPBar(class ANonPlayerCharacter* BossCharacter);
+
+	UPROPERTY()
+	UUserWidget* PlayerHUD;
 	
 };

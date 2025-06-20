@@ -5,13 +5,8 @@
 
 #include "CharacterStatData.h"
 
-// Sets default values for this component's properties
-UDamageManager::UDamageManager()
-{
-}
 
-// Called when the game starts
-void UDamageManager::BeginPlay()
+void UDamageManager::SetStatusFromData(UCharacterStatData* StatData)
 {
 	if (StatData)
 	{
@@ -22,7 +17,7 @@ void UDamageManager::BeginPlay()
 	}
 }
 
-void UDamageManager::SetMaxHealth(const int32 HealthStat)
+void UDamageManager::SetMaxHealth(const float HealthStat)
 {
 	if (HealthStat)
 	{
@@ -30,24 +25,35 @@ void UDamageManager::SetMaxHealth(const int32 HealthStat)
 	}
 }
 
-void UDamageManager::SetCurrentHealth(const int32 Health)
+void UDamageManager::SetCurrentHealth(const float Health)
 {
 	CurrentHealth = Health;
+	OnHPChanged.Broadcast(CurrentHealth);
 }
 
-void UDamageManager::SetMaxStamina(const int32 StaminaStat)
+void UDamageManager::SetMaxStamina(const float StaminaStat)
 {
 	MaxStamina = StaminaStat;
 }
 
-void UDamageManager::SetCurrentStamina(const int32 Stamina)
+void UDamageManager::SetCurrentStamina(const float Stamina)
 {
 	CurrentStamina = Stamina;
 }
 
-void UDamageManager::HitAttack(const int32 Damage)
+void UDamageManager::HitAttack(const float Damage)
 {
-	CurrentHealth = FMath::Clamp(CurrentHealth - Damage, 0, MaxHealth);
+	CurrentHealth = FMath::Clamp(CurrentHealth - Damage, 0.0f, MaxHealth);
+	OnHPChanged.Broadcast(CurrentHealth);
+}
+
+float UDamageManager::GetHPPercent() const
+{
+	if (MaxHealth > 0.0f)
+	{
+		return FMath::Clamp(static_cast<float>(CurrentHealth) / static_cast<float>(MaxHealth), 0.0f, 1.f);
+	}
+	return 0.0f;
 }
 
 

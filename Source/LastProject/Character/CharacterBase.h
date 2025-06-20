@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "CharacterStatData.h"
+#include "DamageManager.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/Character.h"
 #include "LastProject/Interface/CombatInterface.h"
@@ -41,10 +42,13 @@ public:
 	virtual void EnableWeaponCollision_Implementation() override;
 	virtual void DisableWeaponCollision_Implementation() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UAnimMontage> HitMontage;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UAnimMontage> DeathMontage;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UAnimMontage> ParriedMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animation)
@@ -79,24 +83,34 @@ public:
 protected:
 	UFUNCTION(BlueprintCallable, Category = Combat)
 	virtual void Attack();
+
+	// 콤보 관련 함수
 	virtual void ComboActionBegin();
 	void ComboActionEnd(class UAnimMontage* TargetMontage, bool IsProperlyEnded);
+	void ComboCheck();
+	void SetComboCheckTimer();
+	void ResetAttackTime();
 	void AttackInputDelay();
 	virtual void NotifyComboActionEnd();
-	void SetComboCheckTimer();
-	void ComboCheck();
-	void ResetAttackTime();
+	
 
+	// 무적 타이밍에 활성화
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	bool IsInvincible = false;
 
+	// 패리 가능한 공격 시에 활성화
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	bool IsParryable = false;
 
 protected:
+	// 히트 시작/종료 임플리멘테이션
 	virtual void HitBegin_Implementation() override;
 	virtual void HitEnd_Implementation() override;
+
+	// Parry 엔드 시에 바인드할 델리게이트 함수
 	virtual void ParriedEnd(class UAnimMontage* TargetMontage, bool IsProperlyEnded);
+
+	// 콤보 체크 딜레이를 위한 조건 변수
 	bool bCanAttack = true;
 
 	// 현재 재생 중인 콤보 단계
@@ -110,13 +124,32 @@ protected:
 	FTimerHandle ComboTimerHandle;
 	FTimerHandle AttackInputDelayTimerHandle;
 
+	// 콤보 체크 변수
 	bool HasNextComboCommand = false;
 
-	// WalkSpeed
+	// Status
 public:
+	UPROPERTY(EditAnywhere)
+	TObjectPtr<UDamageManager> DamageManager;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UCharacterStatData> StatData;
+
+	UFUNCTION(BlueprintCallable, Category = Status)
+	float GetHPPercent();
+	
 	float WalkSpeed = 150.f;
 	float RunSpeed = 300.f;
+	
+	UFUNCTION()
+	void OnHPChanged(float NewHP);
+	
+	UFUNCTION()
+	void Death();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnDeath();
+	
 	UFUNCTION(BlueprintCallable)
 	void ChangeMoveSpeed(float Speed) const;
 };

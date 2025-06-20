@@ -16,11 +16,11 @@ class LASTPROJECT_API UCharacterStatData : public UPrimaryDataAsset
 
 public:
 	UPROPERTY(EditAnywhere)
-	int32 HPStat = 100;
+	float HPStat = 100;
 	
 	UPROPERTY(EditAnywhere)
-	int32 StaminaStat = 100;
+	float StaminaStat = 100;
 	
 	UPROPERTY(EditAnywhere)
-	int32 PowerStat = 10;
+	float PowerStat = 20;
 };

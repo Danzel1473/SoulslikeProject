@@ -56,6 +56,10 @@ public:
 	// 캐릭터가 점프하는지를 검사할 수 있는 값.
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Character)
 	uint8 bIsJumping : 1;
+	
+	// 캐릭터가 점프하는지를 검사할 수 있는 값.
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Character)
+	uint8 bIsDead : 1;
 
 	// 캐릭터가 점프하는지 여부를 판단하는 데 사용할 문턱 값.
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Character)

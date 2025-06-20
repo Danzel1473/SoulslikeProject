@@ -12,6 +12,7 @@
 #include "NonPlayerCharacter.h"
 #include "TimerManager.h"
 #include "Animation/AnimInstance.h"
+#include "Blueprint/UserWidget.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/DamageType.h"
@@ -132,6 +133,15 @@ void APlayerCharacter::BeginPlay()
 		WeaponCollision->SetGenerateOverlapEvents(true);
 		WeaponCollision->OnComponentBeginOverlap.AddDynamic(this, &APlayerCharacter::OnWeaponOverlapBegin);
 	}
+	
+	if (PlayerHUDClass)
+	{
+		PlayerHUD = CreateWidget<UUserWidget>(GetWorld(), PlayerHUDClass);
+		if (PlayerHUD)
+		{
+			PlayerHUD->AddToViewport();
+		}
+	}
 }
 
 void APlayerCharacter::Tick(float DeltaSeconds)
@@ -198,9 +208,16 @@ void APlayerCharacter::Look(const FInputActionValue& Value)
 
 void APlayerCharacter::Dodge()
 {
+	if (BattleState != BattleState::None) return;
+	
 	if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
 	{
 		SetBattleState(BattleState::Dodging);
+		
+		UE_LOG(LogTemp, Warning, TEXT("CalledFunction: %s / BattleState: %s"), TEXT(__FUNCTION__), *UEnum::GetValueAsString(BattleState));
+
+		
+		
 		float SpeedRate = 1.2; // 추후 무게 값을 반영
 		
 		// Dodge Montage 실행
@@ -291,6 +308,11 @@ void APlayerCharacter::OnWeaponOverlapBegin(UPrimitiveComponent* OverlappedComp,
 	// 테스트용 임시 데미지
 	float DamageAmount = 10.f;
 	UGameplayStatics::ApplyDamage(OtherActor, DamageAmount, GetController(), this, UDamageType::StaticClass());
+}
+
+void APlayerCharacter::ShowBossHPBar(ANonPlayerCharacter* BossCharacter)
+{
+	
 }
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

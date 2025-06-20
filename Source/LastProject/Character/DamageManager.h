@@ -6,7 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "DamageManager.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnHitAttack, AActor*, Attacker, AActor*, Hit, float, Damage);
+// DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnHitAttack, AActor*, Attacker, AActor*, Hit, float, Damage);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHPChanged, float, CurrentHP);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class LASTPROJECT_API UDamageManager : public UActorComponent
@@ -14,43 +15,40 @@ class LASTPROJECT_API UDamageManager : public UActorComponent
 	GENERATED_BODY()
 
 public:
-	UDamageManager();
+	UFUNCTION(BlueprintCallable)
+	void SetStatusFromData(class UCharacterStatData* StatData);
+
+	UPROPERTY(BlueprintAssignable, Category = Stat)
+	FOnHPChanged OnHPChanged;
 	
-protected:	
-	// Sets default values for this component's properties
-	virtual void BeginPlay() override;
-
-public:
-	UPROPERTY(BlueprintAssignable)
-	FOnHitAttack OnHitAttack;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<class UCharacterStatData> StatData;
-
+	
 	// HP
 public:
-	void SetMaxHealth(const int32 HealthStat);
-	void SetCurrentHealth(const int32 Health);
+	void SetMaxHealth(const float HealthStat);
+	void SetCurrentHealth(const float Health);
 	
-	void HitAttack(int32 Damage);
+	void HitAttack(float Damage);
+
+	UFUNCTION(BlueprintCallable)
+	float GetHPPercent() const;
 
 protected:
 	UPROPERTY(EditAnywhere)
-	int32 MaxHealth;
+	float MaxHealth;
 	
 	UPROPERTY(EditAnywhere)
-	int32 CurrentHealth;
+	float CurrentHealth;
 
 	// Stamina
 public:
 	UFUNCTION(BlueprintCallable)
-	void SetMaxStamina(const int32 StaminaStat);
-	void SetCurrentStamina(const int32 Stamina);
+	void SetMaxStamina(const float StaminaStat);
+	void SetCurrentStamina(const float Stamina);
 	
 protected:
 	UPROPERTY(EditAnywhere)
-	int32 MaxStamina;
+	float MaxStamina;
 	
 	UPROPERTY(EditAnywhere)
-	int32 CurrentStamina;
+	float CurrentStamina;
 };

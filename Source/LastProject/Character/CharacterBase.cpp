@@ -3,6 +3,7 @@
 
 #include "CharacterBase.h"
 
+#include "BrainComponent.h"
 #include "CharacterControlData.h"
 #include "ComboActionData.h"
 #include "DamageManager.h"
@@ -11,6 +12,9 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "LastProject/Animation/LPAnimInstance.h"
+#include "LastProject/Enemy/EnemyAIController.h"
+#include "UniversalObjectLocators/AnimInstanceLocatorFragment.h"
 
 // Sets default values
 ACharacterBase::ACharacterBase()
@@ -31,7 +35,7 @@ ACharacterBase::ACharacterBase()
 
 	GetCapsuleComponent()->SetCapsuleHalfHeight(88.0f);
 
-	//DamageManager = CreateDefaultSubobject<UDamageManager>(TEXT("DamageManager"));
+	DamageManager = CreateDefaultSubobject<UDamageManager>(TEXT("DamageManager"));
 	
 	BattleState = BattleState::None;
 
@@ -54,6 +58,12 @@ ACharacterBase::ACharacterBase()
 void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (DamageManager)
+	{
+		DamageManager->SetStatusFromData(StatData);
+		DamageManager->OnHPChanged.AddDynamic(this, &ACharacterBase::OnHPChanged);
+	}
 	WeaponCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 }
@@ -77,10 +87,10 @@ float ACharacterBase::TakeDamage(float DamageAmount, FDamageEvent const& DamageE
 	}
 
 	// Todo: 데미지 계산 처리
-	// if (DamageManager)
-	// {
-	// 	DamageManager->HitAttack(static_cast<int32>(DamageAmount));
-	// }
+	if (DamageManager)
+	{
+		DamageManager->HitAttack(DamageAmount);
+	}
 	
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
@@ -301,6 +311,54 @@ void ACharacterBase::ComboCheck()
 void ACharacterBase::ResetAttackTime()
 {
 	bCanAttack = true;
+}
+
+float ACharacterBase::GetHPPercent()
+{
+	return DamageManager->GetHPPercent();
+}
+
+void ACharacterBase::OnHPChanged(float NewHP)
+{
+	if (NewHP <= 0.f)
+	{
+		Death();
+	}
+}
+
+void ACharacterBase::Death()
+{
+	// 충돌 비활성화
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	
+	if (WeaponCollision)
+	{
+		WeaponCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
+	
+	// AI 정지
+	AEnemyAIController* AI = Cast<AEnemyAIController>(GetController());
+	if (AI)
+	{
+		AI->StopMovement();
+		AI->BrainComponent->StopLogic(TEXT("Dead"));
+	}
+	
+	ULPAnimInstance* AnimInstance = Cast<ULPAnimInstance>(GetMesh()->GetAnimInstance());
+	AnimInstance->bIsDead = true;
+	
+	if (DeathMontage && AnimInstance)
+	{
+		// 현재 몽타주 중지
+		AnimInstance->Montage_Stop(0.1f);
+
+		// 사망 몽타주 실행
+		AnimInstance->Montage_Play(DeathMontage);
+	}
+
+	// 5초 후에 제거
+	SetLifeSpan(5.0f);
 }
 
 void ACharacterBase::ChangeMoveSpeed(const float Speed) const
